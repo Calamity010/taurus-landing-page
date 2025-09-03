@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   const footerSections = [
     {
@@ -62,12 +64,12 @@ const Footer = () => {
               <ul className="space-y-3">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.href}
                       className="text-muted-foreground hover:text-primary hover-glow transition-colors text-sm"
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -78,7 +80,7 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © 2024 Taurus AI. All rights reserved.
+            © 2025 Taurus AI. All rights reserved.
           </div>
 
           {/* Social Links */}
