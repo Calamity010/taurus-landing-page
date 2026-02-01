@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+
 import { Button } from '@/components/ui/button';
-import { Upload, FileText, CheckCircle2, ChevronRight, User, Filter, BarChart } from 'lucide-react';
+import { FileText, CheckCircle2, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const ResumeScreenerPage = () => {

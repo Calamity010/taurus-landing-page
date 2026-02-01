@@ -1,5 +1,5 @@
-import React from 'react';
-import { Search, HelpCircle, MessageCircle, FileQuestion, BookOpen } from 'lucide-react';
+
+import { Search, HelpCircle, MessageCircle, BookOpen } from 'lucide-react';
 
 const HelpCentrePage = () => {
     return (

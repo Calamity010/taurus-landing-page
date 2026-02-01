@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Search, FileText, ChevronRight, Download, Book, Calendar, MapPin, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';

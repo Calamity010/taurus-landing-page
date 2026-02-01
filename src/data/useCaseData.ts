@@ -1,5 +1,5 @@
 
-import { GraduationCap, ShoppingBag, Factory, Stethoscope, Coffee, Briefcase, Cpu, Landmark, Car, Plane, Building2, Users } from 'lucide-react';
+import { GraduationCap, ShoppingBag, Factory, Stethoscope, Coffee, Cpu, Landmark, Car, Plane, Building2, Users } from 'lucide-react';
 
 export const useCaseData: Record<string, any> = {
   'education': {

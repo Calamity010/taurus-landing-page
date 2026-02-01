@@ -1,6 +1,6 @@
-import React from 'react';
+
 import { Button } from '@/components/ui/button';
-import { Check, X, Minus, Plus, Zap, Shield, Users, BarChart3 } from 'lucide-react';
+import { Check, X, Zap } from 'lucide-react';
 
 const ComparePage = () => {
   return (

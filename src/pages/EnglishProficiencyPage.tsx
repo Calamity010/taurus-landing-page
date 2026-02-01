@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Button } from '@/components/ui/button';
 import { Languages, Globe, Mic, Volume2, Award, BookOpen, User } from 'lucide-react';
 import { motion } from 'framer-motion';

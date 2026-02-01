@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+
 import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Check, Star, Shield, Zap, ChevronDown, CheckCircle2 } from 'lucide-react';
+import { Star, Zap, ChevronDown, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useCaseData } from '@/data/useCaseData';
 import SavingsSection from '@/components/SavingsSection';
@@ -9,7 +9,7 @@ import SavingsSection from '@/components/SavingsSection';
 export default function UseCasePage() {
   const { industryId } = useParams();
   const data = useCaseData[industryId || 'education'] || useCaseData['education'];
-  const IndustryIcon = data.icon;
+
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-blue-100 pt-20">

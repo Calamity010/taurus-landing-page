@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button } from '@/components/ui/button';
+
+
 import { Search } from 'lucide-react';
 
 const featuredPosts = [

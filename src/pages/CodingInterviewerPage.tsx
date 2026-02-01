@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Button } from '@/components/ui/button';
 import { Code2, Terminal, Play, Cpu, Check, ListChecks } from 'lucide-react';
 import { motion } from 'framer-motion';

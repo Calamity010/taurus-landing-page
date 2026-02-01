@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { CreditCard, Plus, Minus, BadgeHelp } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 
 const CreditsCalculatorPage = () => {
     const [interviews, setInterviews] = useState(500);

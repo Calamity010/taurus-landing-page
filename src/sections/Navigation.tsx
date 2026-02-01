@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown, User, Briefcase, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -69,7 +69,7 @@ const industries = [
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { pathname } = useLocation();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -81,27 +81,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    // If it's an internal link
-    if (!href.startsWith('#')) {
-      navigate(href);
-      setIsMobileMenuOpen(false);
-      return;
-    }
 
-    // It's a hash link
-    if (pathname !== '/') {
-      navigate(`/${href}`);
-      setIsMobileMenuOpen(false);
-      return;
-    }
-
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMobileMenuOpen(false);
-  };
 
   return (
     <>

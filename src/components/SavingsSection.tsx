@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Sliders } from 'lucide-react';
+
 
 export default function SavingsSection() {
   const [applicants, setApplicants] = useState(50000);
   const timePerCall = 10; // minutes
-  const ratio = 0.1; // 10%
+
 
   // Calculations based on Hyring logic (approx)
   // 50,000 applicants * 10 mins = 500,000 mins
