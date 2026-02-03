@@ -6,35 +6,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-    /* Taurus Hire Primary Color #172554 and its shades */
-    --primary: 222 76% 21%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 222 60% 35%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 222 30% 96%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 222 50% 30%;
-    --accent-foreground: 0 0% 100%;
+    --background: 0 0% 3%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 98%;
+    /* Taurus Primary Color - Monochrome for Black & White Theme */
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 222 76% 21%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 80%;
     --radius: 0.75rem;
     
-    /* Custom colors - Taurus Hire palette */
-    --primary-light: 222 60% 35%;
-    --primary-dark: 222 80% 15%;
-    --taurus: 222 76% 21%;
-    --taurus-light: 222 50% 95%;
-    --taurus-dark: 222 85% 12%;
-    --surface-dark: 222 47% 11%;
+    /* Custom colors - Taurus palette - Updated for Dark Mode */
+    --primary-light: 0 0% 15%;
+    --primary-dark: 0 0% 98%;
+    --taurus: 0 0% 98%;
+    --taurus-light: 0 0% 20%;
+    --taurus-dark: 0 0% 5%;
+    --surface-dark: 0 0% 0%;
     --success: 142 71% 45%;
   }
 }
@@ -56,30 +56,32 @@
 
 @layer utilities {
   .gradient-primary {
-    background: linear-gradient(135deg, #172554 0%, #1e3a5f 50%, #2563eb 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 50%, #52525b 100%);
   }
   
   .gradient-text {
-    background: linear-gradient(135deg, #172554 0%, #1e3a5f 50%, #2563eb 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 50%, #52525b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   
   .gradient-dark {
-    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(180deg, #000000 0%, #18181b 100%);
   }
   
   .glass {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   .glass-dark {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   .text-balance {
@@ -154,20 +156,20 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #27272a;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #3f3f46;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(23, 37, 84, 0.3);
-  color: #0f172a;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }

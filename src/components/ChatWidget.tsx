@@ -18,7 +18,7 @@ export default function ChatWidget() {
     {
       id: 'welcome',
       role: 'assistant',
-      content: 'Hello! I\'m Taurus Hire AI. How can I help you with your recruiting needs today?',
+      content: 'Hello! I\'m Taurus AI. How can I help you with your recruiting needs today?',
       timestamp: new Date(),
     },
   ]);
@@ -57,7 +57,7 @@ export default function ChatWidget() {
     
     if (aiService) {
       try {
-        const context = `You are Taurus Hire AI, an AI recruiting assistant. You help users understand Taurus Hire's AI recruiting platform features including:
+        const context = `You are Taurus AI, an AI recruiting assistant. You help users understand Taurus's AI recruiting platform features including:
 - AI Video Interviewer
 - AI Phone Screener  
 - AI Resume Screener
@@ -116,7 +116,7 @@ Be helpful, professional, and concise. Answer questions about pricing, features,
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-primary shadow-glow-lg flex items-center justify-center text-white"
+        className="fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-white shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center justify-center text-black"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -153,20 +153,20 @@ Be helpful, professional, and concise. Answer questions about pricing, features,
             transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="fixed bottom-20 right-4 z-50 w-96 max-w-[calc(100vw-2rem)]"
           >
-            <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+            <div className="bg-zinc-950 rounded-2xl shadow-2xl border border-zinc-800 overflow-hidden">
               {/* Header */}
-              <div className="bg-primary p-4 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+              <div className="bg-zinc-900 p-4 flex items-center gap-3 border-b border-zinc-800">
+                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                   <Bot className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white">Taurus Hire AI</h3>
-                  <p className="text-xs text-blue-100">Online</p>
+                  <h3 className="font-semibold text-white">Taurus AI</h3>
+                  <p className="text-xs text-zinc-400">Online</p>
                 </div>
               </div>
 
               {/* Messages */}
-              <div className="h-80 overflow-y-auto p-4 space-y-4 bg-slate-50">
+              <div className="h-80 overflow-y-auto p-4 space-y-4 bg-zinc-950/50">
                 {messages.map((message) => (
                   <motion.div
                     key={message.id}
@@ -179,12 +179,12 @@ Be helpful, professional, and concise. Answer questions about pricing, features,
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                         message.role === 'user'
-                          ? 'bg-primary'
-                          : 'bg-primary'
+                          ? 'bg-white'
+                          : 'bg-zinc-800'
                       }`}
                     >
                       {message.role === 'user' ? (
-                        <User className="w-4 h-4 text-white" />
+                        <User className="w-4 h-4 text-black" />
                       ) : (
                         <Bot className="w-4 h-4 text-white" />
                       )}
@@ -192,8 +192,8 @@ Be helpful, professional, and concise. Answer questions about pricing, features,
                     <div
                       className={`max-w-[75%] p-3 rounded-2xl text-sm ${
                         message.role === 'user'
-                          ? 'bg-primary text-white rounded-br-none'
-                          : 'bg-white text-slate-700 shadow-soft rounded-bl-none'
+                          ? 'bg-white text-black rounded-br-none'
+                          : 'bg-zinc-900 border border-zinc-800 text-zinc-100 shadow-soft rounded-bl-none'
                       }`}
                     >
                       {message.content}
@@ -206,11 +206,11 @@ Be helpful, professional, and concise. Answer questions about pricing, features,
                     animate={{ opacity: 1 }}
                     className="flex gap-3"
                   >
-                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center">
                       <Bot className="w-4 h-4 text-white" />
                     </div>
-                    <div className="bg-white p-3 rounded-2xl rounded-bl-none shadow-soft">
-                      <Loader2 className="w-4 h-4 animate-spin text-primary" />
+                    <div className="bg-zinc-900 border border-zinc-800 p-3 rounded-2xl rounded-bl-none shadow-soft">
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
                     </div>
                   </motion.div>
                 )}
@@ -218,20 +218,20 @@ Be helpful, professional, and concise. Answer questions about pricing, features,
               </div>
 
               {/* Input */}
-              <div className="p-4 bg-white border-t border-slate-200">
+              <div className="p-4 bg-zinc-900 border-t border-zinc-800">
                 <div className="flex gap-2">
                   <Input
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder="Type your message..."
-                    className="flex-1"
+                    className="flex-1 bg-zinc-950 border-zinc-700 text-white placeholder:text-zinc-500 focus-visible:ring-white/20"
                     disabled={isLoading}
                   />
                   <Button
                     onClick={handleSend}
                     disabled={!input.trim() || isLoading}
-                    className="bg-primary text-white hover:bg-primary-800"
+                    className="bg-white text-black hover:bg-zinc-200"
                   >
                     <Send className="w-4 h-4" />
                   </Button>

@@ -5,13 +5,13 @@ import { motion } from 'framer-motion';
 
 const CodingInterviewerPage = () => {
   return (
-    <div className="min-h-screen bg-slate-50 font-sans pt-20 text-slate-900 selection:bg-blue-100">
+    <div className="min-h-screen bg-background font-sans pt-20 text-slate-900 selection:bg-blue-500/30">
       
       {/* Hero Section */}
       <section className="relative pt-16 pb-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-medium mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-900/20 border border-blue-500/20 text-blue-400 text-sm font-medium mb-8">
             <Terminal size={14} />
             <span>AI-Powered Technical Assessments</span>
           </div>
@@ -19,20 +19,20 @@ const CodingInterviewerPage = () => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-slate-900"
+            className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-white"
           >
-            Conduct Coding Interviews<br />With <span className="text-blue-600">AI Pilot</span>
+            Conduct Coding Interviews<br />With <span className="text-blue-500">AI Pilot</span>
           </motion.h1>
           
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-12">
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12">
             Run live coding interviews with Hyring’s coding interview platform. Automate assessments, get instant scores and hire developers faster.
           </p>
 
           <div className="flex justify-center gap-4 mb-20">
-             <Button className="bg-blue-600 hover:bg-blue-700 text-white h-12 px-8 rounded-full text-lg font-bold shadow-lg shadow-blue-200 transition-all transform hover:scale-105">
+             <Button onClick={() => window.location.href = '/contact-us'} className="bg-blue-600 hover:bg-blue-700 text-white h-12 px-8 rounded-full text-lg font-bold shadow-lg shadow-blue-900/50 transition-all transform hover:scale-105">
                 Start Free Trial
              </Button>
-             <Button variant="outline" className="border-slate-300 text-slate-600 hover:bg-slate-50 h-12 px-8 rounded-full text-lg">
+             <Button variant="outline" onClick={() => window.location.href = '/contact-us'} className="border-slate-600 text-slate-300 hover:bg-slate-800 h-12 px-8 rounded-full text-lg">
                 View Demo
              </Button>
           </div>
@@ -42,10 +42,10 @@ const CodingInterviewerPage = () => {
              initial={{ opacity: 0, scale: 0.95 }}
              animate={{ opacity: 1, scale: 1 }}
              transition={{ duration: 0.8 }}
-             className="max-w-6xl mx-auto rounded-xl overflow-hidden shadow-2xl border border-slate-200 bg-[#1e1e1e] text-white"
+             className="max-w-6xl mx-auto rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-[#0c0c0c] text-white"
           >
              {/* IDE Header */}
-             <div className="bg-[#2d2d2d] px-4 py-2 flex items-center justify-between border-b border-black">
+             <div className="bg-[#18181b] px-4 py-2 flex items-center justify-between border-b border-black">
                 <div className="flex gap-2">
                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -131,36 +131,36 @@ const CodingInterviewerPage = () => {
       </section>
 
       {/* Features / How it works */}
-      <section className="py-24 bg-white border-t border-slate-100 relative z-10">
+      <section className="py-24 bg-background border-t border-white/10 relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                <div className="text-center mb-16">
-                   <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Why Choose Coding Interview Platform</h2>
-                    <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+                   <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Choose Coding Interview Platform</h2>
+                    <p className="text-xl text-slate-400 max-w-3xl mx-auto">
                         Transform your technical hiring process with Hyring’s AI coding interviewer. Conduct live coding interviews, evaluate candidates and get detailed reports.
                     </p>
                </div>
 
                <div className="grid md:grid-cols-3 gap-8">
-                   <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all">
-                       <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
+                   <div className="bg-card p-8 rounded-2xl border border-white/10 hover:border-blue-500/50 hover:shadow-lg transition-all">
+                       <div className="w-12 h-12 bg-blue-900/20 rounded-lg flex items-center justify-center mb-6 text-blue-400">
                            <Code2 size={24} />
                        </div>
-                       <h3 className="text-xl font-bold text-slate-900 mb-4">Real-world Coding Environment</h3>
-                       <p className="text-slate-600">Support for 30+ languages including Python, Java, C++, and JavaScript with autocomplete and linting.</p>
+                       <h3 className="text-xl font-bold text-white mb-4">Real-world Coding Environment</h3>
+                       <p className="text-slate-400">Support for 30+ languages including Python, Java, C++, and JavaScript with autocomplete and linting.</p>
                    </div>
-                   <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all">
-                       <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
+                   <div className="bg-card p-8 rounded-2xl border border-white/10 hover:border-blue-500/50 hover:shadow-lg transition-all">
+                       <div className="w-12 h-12 bg-blue-900/20 rounded-lg flex items-center justify-center mb-6 text-blue-400">
                            <Terminal size={24} />
                        </div>
-                       <h3 className="text-xl font-bold text-slate-900 mb-4">AI Pair Programming</h3>
-                       <p className="text-slate-600">The AI acts as an interviewer, asking follow-up questions about complexity, edge cases, and optimization.</p>
+                       <h3 className="text-xl font-bold text-white mb-4">AI Pair Programming</h3>
+                       <p className="text-slate-400">The AI acts as an interviewer, asking follow-up questions about complexity, edge cases, and optimization.</p>
                    </div>
-                   <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all">
-                       <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
+                   <div className="bg-card p-8 rounded-2xl border border-white/10 hover:border-blue-500/50 hover:shadow-lg transition-all">
+                       <div className="w-12 h-12 bg-blue-900/20 rounded-lg flex items-center justify-center mb-6 text-blue-400">
                            <ListChecks size={24} />
                        </div>
-                       <h3 className="text-xl font-bold text-slate-900 mb-4">Automated Grading</h3>
-                       <p className="text-slate-600">Get instant scores on correctness, efficiency, code style, and problem-solving approach.</p>
+                       <h3 className="text-xl font-bold text-white mb-4">Automated Grading</h3>
+                       <p className="text-slate-400">Get instant scores on correctness, efficiency, code style, and problem-solving approach.</p>
                    </div>
                </div>
           </div>
@@ -170,8 +170,8 @@ const CodingInterviewerPage = () => {
       <section className="py-20 bg-primary text-white text-center">
             <div className="max-w-4xl mx-auto px-4">
                  <h2 className="text-4xl font-bold text-white mb-4">Enterprise-Grade Coding Interview Platform</h2>
-                 <p className="text-xl text-blue-100 mb-8">Pricing starts as low as <strong className="text-white">$1.00</strong> per interview</p>
-                 <Button className="bg-white text-primary hover:bg-slate-100 font-bold px-8 py-6 text-lg rounded-full shadow-xl">
+                 <p className="text-xl text-blue-100 mb-8">Pricing starts as low as <strong className="text-black bg-white px-2 py-1 rounded">$1.00</strong> per interview</p>
+                 <Button onClick={() => window.location.href = '/contact-us'} className="bg-white text-black hover:bg-slate-200 font-bold px-8 py-6 text-lg rounded-full shadow-xl transition-all hover:scale-[1.02]">
                      Transform Your Hiring
                  </Button>
             </div>

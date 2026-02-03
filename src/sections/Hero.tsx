@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import VoiceInterviewer from '@/components/VoiceInterviewer';
 import {
   Mic,
   Star,
@@ -136,6 +137,7 @@ const workflowItems = [
 export default function Hero() {
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('workflow');
+  const [isVoiceInterviewerOpen, setIsVoiceInterviewerOpen] = useState(false);
   
   // Use hovered tab if available, otherwise use active tab
   const displayTabId = hoveredTab || activeTab;
@@ -143,13 +145,17 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen pt-[72px] overflow-hidden">
+      <VoiceInterviewer 
+        isOpen={isVoiceInterviewerOpen} 
+        onClose={() => setIsVoiceInterviewerOpen(false)} 
+      />
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-primary/3 to-white" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-primary/3 to-background" />
         <div 
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: `url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23172554" fill-opacity="0.06"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')`,
+            backgroundImage: `url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.06"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')`,
           }}
         />
         {/* Mountain illustration effect */}
@@ -157,8 +163,8 @@ export default function Hero() {
           <svg viewBox="0 0 1440 400" className="w-full h-full" preserveAspectRatio="none">
             <defs>
               <linearGradient id="mountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#e0e7ff" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#c7d2fe" stopOpacity="0.8" />
+                <stop offset="0%" stopColor="#18181b" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#09090b" stopOpacity="0.8" />
               </linearGradient>
             </defs>
             <path
@@ -167,7 +173,7 @@ export default function Hero() {
             />
             <path
               d="M0,400 L0,300 Q300,200 600,280 T1000,250 T1440,300 L1440,400 Z"
-              fill="#dbe4ff"
+              fill="#27272a"
               fillOpacity="0.4"
             />
           </svg>
@@ -180,7 +186,7 @@ export default function Hero() {
               initial={{ x: '5vw' }}
               animate={{ x: '110vw' }}
               transition={{ repeat: Infinity, duration: 85, ease: "linear" }}
-              className="absolute top-[5%] left-0 text-blue-100/40"
+              className="absolute top-[5%] left-0 text-zinc-800/40"
            >
               <motion.div
                 animate={{ y: [0, -30, 10, -15, 0] }}
@@ -195,7 +201,7 @@ export default function Hero() {
               initial={{ x: '40vw' }}
               animate={{ x: '110vw' }}
               transition={{ repeat: Infinity, duration: 65, ease: "linear" }}
-              className="absolute top-[15%] left-0 text-indigo-50/30"
+              className="absolute top-[15%] left-0 text-zinc-900/30"
            >
                <motion.div
                   animate={{ y: [0, 40, -20, 10, 0] }}
@@ -210,7 +216,7 @@ export default function Hero() {
               initial={{ x: -150 }}
               animate={{ x: '110vw' }}
               transition={{ repeat: Infinity, duration: 45, ease: "linear", delay: 0 }}
-              className="absolute top-[8%] left-0 text-white/40"
+              className="absolute top-[8%] left-0 text-white/5"
            >
                <motion.div
                   animate={{ y: [0, -15, 15, 0] }}
@@ -225,7 +231,7 @@ export default function Hero() {
               initial={{ x: '75vw' }}
               animate={{ x: '110vw' }}
               transition={{ repeat: Infinity, duration: 70, ease: "linear" }}
-              className="absolute top-[30%] left-0 text-blue-50/30"
+              className="absolute top-[30%] left-0 text-zinc-800/30"
            >
                <motion.div
                   animate={{ y: [0, -25, 25, -10, 0] }}
@@ -240,7 +246,7 @@ export default function Hero() {
               initial={{ x: -100 }}
               animate={{ x: '110vw' }}
               transition={{ repeat: Infinity, duration: 35, ease: "linear", delay: 15 }}
-              className="absolute top-[20%] left-0 text-sky-100/40"
+              className="absolute top-[20%] left-0 text-zinc-700/40"
            >
                <motion.div
                   animate={{ y: [0, 20, -20, 0] }}
@@ -255,7 +261,7 @@ export default function Hero() {
               initial={{ x: '25vw' }}
               animate={{ x: '110vw' }}
               transition={{ repeat: Infinity, duration: 80, ease: "linear" }}
-              className="absolute top-[12%] left-0 text-blue-50/20"
+              className="absolute top-[12%] left-0 text-zinc-800/20"
            >
                <motion.div
                   animate={{ y: [0, -40, 20, -10, 0] }}
@@ -285,7 +291,7 @@ export default function Hero() {
               initial={{ x: '10vw' }}
               animate={{ x: '110vw' }}
               transition={{ repeat: Infinity, duration: 100, ease: "linear" }}
-              className="absolute top-[22%] left-0 text-indigo-50/20"
+              className="absolute top-[22%] left-0 text-zinc-900/20"
            >
                <motion.div
                   animate={{ y: [0, -50, 50, 0] }}
@@ -309,11 +315,11 @@ export default function Hero() {
             href="https://www.g2.com/products/ai-interviewer/reviews"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-soft hover:shadow-soft-lg transition-shadow"
+            className="flex items-center gap-2 px-4 py-2 bg-card rounded-full shadow-soft hover:shadow-soft-lg transition-shadow"
           >
             <div className="flex items-center gap-1">
               <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-              <span className="font-semibold text-slate-900">4.9</span>
+              <span className="font-semibold text-white">4.9</span>
             </div>
             <div className="flex">
               {[...Array(5)].map((_, i) => (
@@ -325,10 +331,10 @@ export default function Hero() {
             href="https://www.producthunt.com/products/ai-interviewer-by-taurushire"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-soft hover:shadow-soft-lg transition-shadow"
+            className="flex items-center gap-2 px-4 py-2 bg-card rounded-full shadow-soft hover:shadow-soft-lg transition-shadow"
           >
             <Trophy className="w-4 h-4 text-orange-500" />
-            <span className="font-medium text-slate-700">5 x Product of the day</span>
+            <span className="font-medium text-slate-300">5 x Product of the day</span>
           </a>
         </motion.div>
 
@@ -343,8 +349,8 @@ export default function Hero() {
             <Briefcase className="w-4 h-4 text-primary" />
             <span className="text-sm font-semibold text-primary">HIRE MORE HUMANS WITH AI</span>
           </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 mb-4">
-            Taurus Hire
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4">
+            Taurus
             <br />
             <span className="gradient-text">Platform</span>
           </h1>
@@ -359,7 +365,8 @@ export default function Hero() {
         >
           <Button
             size="lg"
-            className="gradient-primary text-white rounded-full px-8 py-6 text-lg shadow-glow hover:shadow-glow-lg transition-all duration-300 hover:scale-[1.02] group"
+            className="gradient-primary text-black rounded-full px-8 py-6 text-lg shadow-glow hover:shadow-glow-lg transition-all duration-300 hover:scale-[1.02] group"
+            onClick={() => setIsVoiceInterviewerOpen(true)}
           >
             <div className="relative mr-3">
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
@@ -395,8 +402,8 @@ export default function Hero() {
                   onClick={() => setActiveTab(item.id)}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
                     isSelected
-                      ? 'bg-primary text-white shadow-glow'
-                      : 'bg-white/80 hover:bg-white text-slate-700 shadow-soft hover:shadow-soft-lg'
+                      ? 'bg-primary text-black shadow-glow'
+                      : 'bg-card hover:bg-card/80 text-slate-300 shadow-soft hover:shadow-soft-lg'
                   }`}
                 >
                   <div
@@ -404,7 +411,7 @@ export default function Hero() {
                       isSelected ? 'bg-white/20' : 'bg-primary/10'
                     }`}
                   >
-                    <Icon className={`w-4 h-4 ${isSelected ? 'text-white' : 'text-primary'}`} />
+                    <Icon className={`w-4 h-4 ${isSelected ? 'text-black' : 'text-primary'}`} />
                   </div>
                   <span className="font-medium text-sm">{item.title}</span>
                 </button>
@@ -420,12 +427,12 @@ export default function Hero() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.2 }}
-              className="bg-white rounded-2xl shadow-soft-lg p-6 lg:p-8"
+              className="bg-card rounded-2xl shadow-soft-lg p-6 lg:p-8"
             >
-              <h3 className="text-xl font-bold text-slate-900 mb-2">
+              <h3 className="text-xl font-bold text-white mb-2">
                 {displayItem.content.heading}
               </h3>
-              <p className="text-slate-600 mb-6">{displayItem.content.description}</p>
+              <p className="text-slate-400 mb-6">{displayItem.content.description}</p>
 
               <div className="space-y-3">
                 {displayItem.content.steps.map((step, index) => (
@@ -434,13 +441,13 @@ export default function Hero() {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.2, delay: index * 0.05 }}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-slate-50"
+                    className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50"
                   >
                     <div
                       className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
                         step.completed
                           ? 'bg-green-500'
-                          : 'bg-slate-200'
+                          : 'bg-secondary'
                       }`}
                     >
                       {step.completed ? (
@@ -449,7 +456,7 @@ export default function Hero() {
                         <Clock className="w-4 h-4 text-slate-400" />
                       )}
                     </div>
-                    <span className={`text-sm ${step.completed ? 'text-slate-700' : 'text-slate-400'}`}>
+                    <span className={`text-sm ${step.completed ? 'text-slate-300' : 'text-slate-500'}`}>
                       {step.text}
                     </span>
                   </motion.div>

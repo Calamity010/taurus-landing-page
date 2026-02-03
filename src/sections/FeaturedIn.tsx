@@ -13,7 +13,7 @@ export default function FeaturedIn() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>();
 
   return (
-    <section ref={ref} className="py-16 bg-white">
+    <section ref={ref} className="py-16 bg-background">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,7 +41,7 @@ export default function FeaturedIn() {
               transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
               className="group"
             >
-              <span className="text-xl md:text-2xl font-bold text-slate-400 group-hover:text-indigo-600 transition-colors duration-300">
+              <span className="text-xl md:text-2xl font-bold text-slate-400 group-hover:text-white transition-colors duration-300">
                 {outlet.display}
               </span>
             </motion.a>

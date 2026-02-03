@@ -15,6 +15,7 @@ import Stats from '@/sections/Stats';
 import FeaturedIn from '@/sections/FeaturedIn';
 import FAQ from '@/sections/FAQ';
 import Footer from '@/sections/Footer';
+import ROICalculator from '@/sections/ROICalculator';
 import CookieConsent from '@/components/CookieConsent';
 import ChatWidget from '@/components/ChatWidget';
 
@@ -32,6 +33,7 @@ import ROICalculatorPage from '@/pages/ROICalculatorPage';
 import CreditsCalculatorPage from '@/pages/CreditsCalculatorPage';
 import HelpCentrePage from '@/pages/HelpCentrePage';
 import PricingPage from '@/pages/PricingPage';
+import ContactUsPage from '@/pages/ContactUsPage';
 
 const HomePage = () => (
   <main>
@@ -44,6 +46,7 @@ const HomePage = () => (
     <HumanAIComparison />
     <Pricing />
     <Stats />
+    <ROICalculator />
     <FeaturedIn />
     <FAQ />
   </main>
@@ -84,6 +87,7 @@ function App() {
         <Route path="/english-proficiency-test" element={<EnglishProficiencyPage />} />
         <Route path="/ai-phone-screener" element={<PhoneScreenerPage />} />
         <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/contact-us" element={<ContactUsPage />} />
 
         {/* Resource Routes */}
         <Route path="/resources/compare" element={<ComparePage />} />

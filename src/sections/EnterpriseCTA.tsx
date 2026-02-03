@@ -1,10 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Star, MessageCircle, ShoppingCart } from 'lucide-react';
+import { Star, MessageCircle, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation, useCountUp } from '@/hooks/useScrollAnimation';
 import { useEffect } from 'react';
 
 export default function EnterpriseCTA() {
+  const navigate = useNavigate();
   const { ref, isVisible } = useScrollAnimation<HTMLElement>();
   const { count, startAnimation } = useCountUp(100, 1500);
 
@@ -42,7 +44,7 @@ export default function EnterpriseCTA() {
             Enterprise-Grade
           </h2>
           <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Taurus Hire Platform
+            Taurus Platform
           </h3>
 
           <p className="text-slate-400 mb-4">Pricing starts as low as</p>
@@ -61,13 +63,15 @@ export default function EnterpriseCTA() {
 
           <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
             <Button
+              onClick={() => navigate('/contact-us')}
               size="lg"
-              className="bg-white text-slate-900 hover:bg-slate-100 rounded-full px-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+              className="bg-white text-black hover:bg-white/90 rounded-full px-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
             >
-              <ShoppingCart className="w-5 h-5 mr-2" />
-              Purchase Credits
+              <Mail className="w-5 h-5 mr-2" />
+              Contact Us
             </Button>
             <Button
+              onClick={() => navigate('/contact-us')}
               size="lg"
               variant="outline"
               className="border-slate-600 text-white hover:bg-slate-800 rounded-full px-8"

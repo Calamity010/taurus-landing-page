@@ -27,17 +27,17 @@ const Waveform = () => (
 
 const PhoneScreenerPage = () => {
 return (
-  <div className="min-h-screen bg-[#f2fcf5] font-satoshi relative overflow-hidden pt-20">
+  <div className="min-h-screen bg-background font-satoshi relative overflow-hidden pt-20">
        
        {/* Hero Section */}
        <div className="relative z-10">
            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                <div className="text-center mb-16 relative">
-                  <div className="uppercase tracking-widest text-sm font-bold text-slate-500 mb-4">AI PHONE SCREENER</div>
-                  <h1 className="text-5xl md:text-7xl font-bold text-[#0f1a2e] tracking-tight mb-6 leading-tight">
+                  <div className="uppercase tracking-widest text-sm font-bold text-slate-400 mb-4">AI PHONE SCREENER</div>
+                  <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight mb-6 leading-tight">
                     Screen 1000 candidates<br />before lunch
                   </h1>
-                  <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed mb-4">
+                  <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed mb-4">
                     Automate initial candidate screening with AI phone interview software that calls applicants,<br className="hidden md:block"/> asks role-specific questions, scores responses, and shortlists the best fits.
                   </p>
                </div>
@@ -144,16 +144,16 @@ return (
        </div>
 
        {/* Social Proof */}
-       <div className="py-12 bg-white border-b border-gray-100">
+        <div className="py-12 bg-background border-b border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="flex flex-wrap justify-center gap-4 mb-8">
-               <div className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-100 rounded-full shadow-sm">
+               <div className="flex items-center gap-2 px-4 py-2 bg-card border border-white/10 rounded-full shadow-sm">
                    <div className="w-6 h-6 bg-orange-500 rounded-full text-white text-xs flex items-center justify-center font-bold">P</div>
-                   <span className="font-bold text-slate-800 text-sm">#3 Product of the Day</span>
+                   <span className="font-bold text-white text-sm">#3 Product of the Day</span>
                </div>
-               <div className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-100 rounded-full shadow-sm">
+               <div className="flex items-center gap-2 px-4 py-2 bg-card border border-white/10 rounded-full shadow-sm">
                    <div className="w-6 h-6 bg-slate-200 rounded-full text-slate-600 text-xs flex items-center justify-center font-bold">2</div>
-                   <span className="font-bold text-slate-800 text-sm">#2 Product of the Day</span>
+                   <span className="font-bold text-white text-sm">#2 Product of the Day</span>
                </div>
             </div>
             <p className="text-sm font-semibold tracking-wider text-slate-400 uppercase mb-8">
@@ -161,18 +161,18 @@ return (
             </p>
             <div className="flex flex-wrap justify-center gap-x-12 gap-y-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
                {['Uber', 'IBM', 'Tencent', 'Meesho', 'Reliance', 'S.K. Rathi'].map((brand) => (
-                   <span key={brand} className="text-xl font-bold font-serif text-slate-800 flex items-center">{brand}</span>
+                   <span key={brand} className="text-xl font-bold font-serif text-white flex items-center">{brand}</span>
                ))}
             </div>
           </div>
        </div>
 
        {/* How it works section */}
-       <div className="py-24 bg-white relative">
+        <div className="py-24 bg-background relative">
             <div className="max-w-4xl mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold text-slate-900 mb-4">How AI Phone Screener works</h2>
-                    <p className="text-lg text-slate-500">Automate your screening process in 5 simple steps</p>
+                    <h2 className="text-4xl font-bold text-white mb-4">How AI Phone Screener works</h2>
+                    <p className="text-lg text-slate-400">Automate your screening process in 5 simple steps</p>
                 </div>
 
                 <div className="space-y-4">
@@ -183,17 +183,17 @@ return (
                         { step: "04", title: "AI Agent Screens Candidate", open: false },
                         { step: "05", title: "Get Screening Report", open: false },
                     ].map((item, idx) => (
-                        <div key={idx} className={`border rounded-xl transition-all duration-300 ${item.open ? 'border-green-500 bg-green-50/50' : 'border-slate-200 hover:border-slate-300'}`}>
+                        <div key={idx} className={`border rounded-xl transition-all duration-300 ${item.open ? 'border-green-500 bg-green-900/10' : 'border-white/10 hover:border-white/20'}`}>
                             <div className="p-6 flex items-center justify-between cursor-pointer">
                                 <div className="flex items-center gap-6">
                                     <span className={`text-sm font-bold tracking-widest ${item.open ? 'text-green-600' : 'text-slate-400'}`}>{item.step}</span>
-                                    <h3 className={`text-xl font-bold ${item.open ? 'text-slate-900' : 'text-slate-500'}`}>{item.title}</h3>
+                                    <h3 className={`text-xl font-bold ${item.open ? 'text-white' : 'text-slate-400'}`}>{item.title}</h3>
                                 </div>
                                 {item.open ? <Minus className="w-5 h-5 text-green-600" /> : <Plus className="w-5 h-5 text-slate-400" />}
                             </div>
                             {item.open && (
                                 <div className="px-6 pb-6 pl-20">
-                                    <p className="text-slate-600 leading-relaxed">
+                                    <p className="text-slate-400 leading-relaxed">
                                         Configure specific languages and choose from our library of natural-sounding AI voices to best represent your company brand.
                                     </p>
                                 </div>
@@ -205,11 +205,11 @@ return (
        </div>
 
        {/* Why Choose Section */}
-       <div className="py-24 bg-[#f8fafc]">
+        <div className="py-24 bg-secondary">
            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                <div className="text-center mb-16">
-                   <h2 className="text-4xl font-bold text-slate-900 mb-6">Why Choose Hyring's AI Phone Screener</h2>
-                   <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+                   <h2 className="text-4xl font-bold text-white mb-6">Why Choose Hyring's AI Phone Screener</h2>
+                   <p className="text-xl text-slate-400 max-w-3xl mx-auto">
                        Cut hours of manual screening into minutes with AI phone screening. It helps you find the best candidates instantly.
                    </p>
                </div>
@@ -220,10 +220,10 @@ return (
                        { title: "Reduce Bias", icon: "⚖️", desc: "Standardized questions and objective scoring ensure every candidate gets a fair chance." },
                        { title: "Save Time", icon: "⏱️", desc: "Skip the repetitive phone screens and jump straight to interviewing qualified candidates." }
                    ].map((feature, i) => (
-                       <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                       <div key={i} className="bg-card p-8 rounded-2xl shadow-sm border border-white/10 hover:shadow-md transition-shadow">
                            <div className="text-4xl mb-6">{feature.icon}</div>
-                           <h3 className="text-xl font-bold text-slate-900 mb-3">{feature.title}</h3>
-                           <p className="text-slate-600 leading-relaxed">{feature.desc}</p>
+                           <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                           <p className="text-slate-400 leading-relaxed">{feature.desc}</p>
                        </div>
                    ))}
                </div>

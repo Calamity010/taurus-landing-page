@@ -59,7 +59,7 @@ export default function SoftwareSuite() {
   const activeItem = suiteItems.find((item) => item.id === activeTab) || suiteItems[2];
 
   return (
-    <section ref={ref} id="ai-agents" className="py-20 bg-white">
+    <section ref={ref} id="ai-agents" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -67,10 +67,10 @@ export default function SoftwareSuite() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Recruitment Automation Software Suite
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
             Explore our wide range of AI tools for recruitment to speed up your hiring process and deliver the talent your business needs to grow.
           </p>
         </motion.div>
@@ -93,7 +93,7 @@ export default function SoftwareSuite() {
                   className={`w-full flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300 ${
                     isActive
                       ? 'bg-primary/10 border-2 border-primary'
-                      : 'bg-white border-2 border-transparent hover:bg-slate-50'
+                      : 'bg-card border-2 border-transparent hover:bg-secondary'
                   }`}
                 >
                   <div
@@ -101,14 +101,14 @@ export default function SoftwareSuite() {
                       isActive ? 'bg-primary' : 'bg-slate-100'
                     }`}
                   >
-                    <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-slate-600'}`} />
+                    <Icon className={`w-5 h-5 ${isActive ? 'text-black' : 'text-slate-400'}`} />
                   </div>
-                  <span className={`font-semibold ${isActive ? 'text-primary' : 'text-slate-700'}`}>
+                  <span className={`font-semibold ${isActive ? 'text-primary' : 'text-slate-300'}`}>
                     {item.title}
                   </span>
                   <ArrowRight
                     className={`w-4 h-4 ml-auto transition-transform ${
-                      isActive ? 'text-primary translate-x-1' : 'text-slate-400'
+                      isActive ? 'text-primary translate-x-1' : 'text-slate-500'
                     }`}
                   />
                 </button>
@@ -126,20 +126,20 @@ export default function SoftwareSuite() {
               transition={{ duration: 0.3 }}
               className="relative"
             >
-              <div className="bg-gradient-to-br from-primary/5 to-blue-50 rounded-3xl p-8 h-full">
+              <div className="bg-gradient-to-br from-primary/5 to-secondary/10 rounded-3xl p-8 h-full">
                 {/* Visual Representation */}
                 <div className="mb-8">
-                  <div className="relative bg-white rounded-2xl shadow-soft p-6">
+                  <div className="relative bg-card rounded-2xl shadow-soft p-6">
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
                         {(() => {
                           const Icon = activeItem.icon;
-                          return <Icon className="w-6 h-6 text-white" />;
+                          return <Icon className="w-6 h-6 text-black" />;
                         })()}
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-slate-900">{activeItem.title}</h3>
-                        <p className="text-sm text-slate-500">AI-Powered</p>
+                        <h3 className="text-lg font-bold text-white">{activeItem.title}</h3>
+                        <p className="text-sm text-slate-400">AI-Powered</p>
                       </div>
                     </div>
 
@@ -150,7 +150,7 @@ export default function SoftwareSuite() {
                           <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                             <span className="text-xs font-bold text-primary">{idx + 1}</span>
                           </div>
-                          <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                          <div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden">
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: `${85 - idx * 10}%` }}
@@ -177,7 +177,7 @@ export default function SoftwareSuite() {
                       <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <Check className="w-3 h-3 text-white" />
                       </div>
-                      <span className="text-slate-700">{feature}</span>
+                      <span className="text-slate-300">{feature}</span>
                     </motion.div>
                   ))}
                 </div>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   Check, 
@@ -146,6 +147,7 @@ const creditCosts = [
 ];
 
 export default function PricingPage() {
+  const navigate = useNavigate();
   const [isAnnual, setIsAnnual] = useState(true);
   const [currency, setCurrency] = useState<keyof typeof currencies>('USD');
   const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
@@ -172,7 +174,7 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       
       {/* Hero Section */}
       <section className="relative pt-32 pb-32 bg-[#0A0A0A] text-white overflow-hidden bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:20px_20px]">
@@ -254,30 +256,30 @@ export default function PricingPage() {
           {plans.map((plan) => (
             <div 
               key={plan.name}
-              className={`relative bg-white rounded-2xl p-6 border-2 flex flex-col ${
-                plan.popular ? 'border-primary shadow-glow ring-2 ring-primary/20' : 'border-slate-200'
+              className={`relative bg-card rounded-2xl p-6 border-2 flex flex-col ${
+                plan.popular ? 'border-primary shadow-glow ring-2 ring-primary/20' : 'border-white/10'
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
                   Most Popular
                 </div>
               )}
               
               <div className="mb-4">
-                <h3 className="text-lg font-bold text-slate-900">{plan.name}</h3>
-                <p className="text-xs text-slate-500 mt-1 min-h-[32px]">{plan.description}</p>
+                <h3 className="text-lg font-bold text-white">{plan.name}</h3>
+                <p className="text-xs text-slate-400 mt-1 min-h-[32px]">{plan.description}</p>
               </div>
 
               <div className="mb-6">
                 {plan.isCustom ? (
-                  <span className="text-3xl font-bold text-slate-900">Custom</span>
+                  <span className="text-3xl font-bold text-white">Custom</span>
                 ) : (
                   <div>
-                    <span className="text-3xl font-bold text-slate-900">
+                    <span className="text-3xl font-bold text-white">
                       {convertPrice(isAnnual ? plan.yearlyPrice! : plan.monthlyPrice!)}
                     </span>
-                    <span className="text-sm text-slate-500">/mo</span>
+                    <span className="text-sm text-slate-400">/mo</span>
                     {isAnnual && (
                       <div className="text-xs text-slate-400 mt-1">Billed annually</div>
                     )}
@@ -285,13 +287,13 @@ export default function PricingPage() {
                 )}
               </div>
 
-              <div className="mb-6 bg-slate-50 rounded-lg p-3">
+              <div className="mb-6 bg-secondary/20 rounded-lg p-3">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-slate-500 font-medium">Credits</span>
-                  <span className="text-sm font-bold text-slate-900">{typeof plan.credits === 'number' ? plan.credits.toLocaleString() : plan.credits}</span>
+                  <span className="text-xs text-slate-400 font-medium">Credits</span>
+                  <span className="text-sm font-bold text-white">{typeof plan.credits === 'number' ? plan.credits.toLocaleString() : plan.credits}</span>
                 </div>
                 {!plan.isCustom && (
-                  <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                  <div className="w-full bg-secondary h-1.5 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-primary" 
                       style={{ width: `${Math.min((plan.credits as number) / 60, 100)}%` }}
@@ -302,7 +304,7 @@ export default function PricingPage() {
 
               <ul className="space-y-3 mb-8 flex-grow">
                 {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
+                  <li key={i} className="flex items-start gap-2 text-xs text-slate-400">
                     <Check className="w-3.5 h-3.5 text-green-500 mt-0.5 flex-shrink-0" />
                     <span>{feature}</span>
                   </li>
@@ -310,10 +312,11 @@ export default function PricingPage() {
               </ul>
 
               <Button 
+                onClick={() => navigate('/contact-us')}
                 variant={plan.popular ? 'default' : 'outline'}
-                className={`w-full ${plan.popular ? 'bg-primary hover:bg-primary/90' : ''}`}
+                className={`w-full ${plan.popular ? 'bg-primary text-black hover:bg-primary/90' : 'text-white border-white/20 hover:bg-white/10 hover:text-white'}`}
               >
-                {plan.name === 'Enterprise' ? 'Contact Sales' : 'Buy Now'}
+                {plan.name === 'Enterprise' ? 'Contact Sales' : 'Contact Us'}
               </Button>
             </div>
           ))}
@@ -321,40 +324,40 @@ export default function PricingPage() {
 
         {/* Feature Comparison Table */}
         <div className="mb-20">
-          <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">Compare Features</h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-12">Compare Features</h2>
           
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="bg-card rounded-2xl shadow-sm border border-white/10 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[900px]">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200">
-                    <th className="text-left py-4 px-6 text-sm font-semibold text-slate-900 w-1/4">Features</th>
+                  <tr className="bg-secondary/20 border-b border-white/10">
+                    <th className="text-left py-4 px-6 text-sm font-semibold text-white w-1/4">Features</th>
                     {plans.map(p => (
-                      <th key={p.name} className="py-4 px-4 text-sm font-semibold text-slate-900 text-center w-[15%]">
+                      <th key={p.name} className="py-4 px-4 text-sm font-semibold text-white text-center w-[15%]">
                         {p.name}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-white/5">
                   {features.map((section) => (
                     <>
-                      <tr key={section.category} className="bg-slate-50/50">
-                        <td colSpan={6} className="py-3 px-6 text-sm font-bold text-slate-900 flex items-center gap-2">
+                      <tr key={section.category} className="bg-secondary/10">
+                        <td colSpan={6} className="py-3 px-6 text-sm font-bold text-white flex items-center gap-2">
                           {section.icon && <section.icon className="w-4 h-4 text-primary" />}
                           {section.category}
                         </td>
                       </tr>
                       {section.items.map((item, iIdx) => (
-                        <tr key={iIdx} className="hover:bg-slate-50 transition-colors">
-                          <td className="py-4 px-6 text-sm text-slate-600">
+                        <tr key={iIdx} className="hover:bg-white/5 transition-colors">
+                          <td className="py-4 px-6 text-sm text-slate-400">
                             {item.name}
                           </td>
                           {plans.map((plan, pIdx) => {
                             // Check explicit values first
                             if ('values' in item && item.values) {
                               return (
-                                <td key={plan.name} className="py-4 px-4 text-sm text-slate-900 text-center font-medium">
+                                <td key={plan.name} className="py-4 px-4 text-sm text-white text-center font-medium">
                                   {item.values[pIdx]}
                                 </td>
                               );
@@ -363,7 +366,7 @@ export default function PricingPage() {
                             if ('key' in item) {
                                 let val = plan[item.key as keyof typeof plan];
                                 return (
-                                    <td key={plan.name} className="py-4 px-4 text-sm text-slate-900 text-center font-medium">
+                                    <td key={plan.name} className="py-4 px-4 text-sm text-white text-center font-medium">
                                         {val}
                                     </td>
                                 )
@@ -378,7 +381,7 @@ export default function PricingPage() {
                                   </div>
                                 ) : (
                                   <div className="flex justify-center">
-                                    <Minus className="w-5 h-5 text-slate-300" />
+                                    <Minus className="w-5 h-5 text-slate-600" />
                                   </div>
                                 )}
                               </td>
@@ -398,26 +401,26 @@ export default function PricingPage() {
         <div id="calculators" className="max-w-4xl mx-auto">
           <Tabs defaultValue="credits" className="w-full">
             <div className="flex justify-center mb-8">
-              <TabsList className="bg-white p-1 rounded-full border border-slate-200 shadow-sm">
-                <TabsTrigger value="credits" className="rounded-full px-6 py-2">Credits Calculator</TabsTrigger>
-                <TabsTrigger value="roi" className="rounded-full px-6 py-2">ROI Calculator</TabsTrigger>
+              <TabsList className="bg-card p-1 rounded-full border border-white/10 shadow-sm">
+                <TabsTrigger value="credits" className="rounded-full px-6 py-2 data-[state=active]:bg-primary data-[state=active]:text-black text-slate-400">Credits Calculator</TabsTrigger>
+                <TabsTrigger value="roi" className="rounded-full px-6 py-2 data-[state=active]:bg-primary data-[state=active]:text-black text-slate-400">ROI Calculator</TabsTrigger>
               </TabsList>
             </div>
 
             <TabsContent value="credits">
-              <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+              <div className="bg-card rounded-2xl p-8 border border-white/10 shadow-sm">
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Credits Consumed per Service</h3>
-                  <p className="text-slate-500">Understand how your credits are utilized across different AI services.</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">Credits Consumed per Service</h3>
+                  <p className="text-slate-400">Understand how your credits are utilized across different AI services.</p>
                 </div>
                 <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
                   {creditCosts.map((item) => (
-                    <div key={item.service} className="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:border-primary/20 transition-colors">
+                    <div key={item.service} className="bg-secondary/20 p-6 rounded-xl border border-white/5 hover:border-primary/20 transition-colors">
                       <div className="bg-primary/10 w-10 h-10 rounded-lg flex items-center justify-center mb-4">
                         <item.icon className="w-5 h-5 text-primary" />
                       </div>
-                      <h4 className="font-semibold text-slate-900 mb-1">{item.service}</h4>
-                      <p className="text-2xl font-bold text-primary">{item.cost} <span className="text-sm font-normal text-slate-500">Credit{item.cost !== 1 && 's'}</span></p>
+                      <h4 className="font-semibold text-white mb-1">{item.service}</h4>
+                      <p className="text-2xl font-bold text-primary">{item.cost} <span className="text-sm font-normal text-slate-400">Credit{item.cost !== 1 && 's'}</span></p>
                     </div>
                   ))}
                 </div>
@@ -425,15 +428,15 @@ export default function PricingPage() {
             </TabsContent>
 
             <TabsContent value="roi">
-              <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+              <div className="bg-card rounded-2xl p-8 border border-white/10 shadow-sm">
                 <div className="grid md:grid-cols-2 gap-12">
                   <div>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-6">Estimate your Savings</h3>
+                    <h3 className="text-2xl font-bold text-white mb-6">Estimate your Savings</h3>
                     
                     <div className="space-y-8">
                       <div>
                         <div className="flex justify-between items-center mb-4">
-                          <label className="text-sm font-medium text-slate-700">Monthly Applicants</label>
+                          <label className="text-sm font-medium text-slate-300">Monthly Applicants</label>
                           <span className="text-primary font-bold">{applicants[0]}</span>
                         </div>
                         <Slider 
@@ -447,7 +450,7 @@ export default function PricingPage() {
 
                       <div>
                         <div className="flex justify-between items-center mb-4">
-                          <label className="text-sm font-medium text-slate-700">Time per Screen (mins)</label>
+                          <label className="text-sm font-medium text-slate-300">Time per Screen (mins)</label>
                           <span className="text-primary font-bold">{timePerScreen[0]} mins</span>
                         </div>
                         <Slider 
@@ -487,7 +490,7 @@ export default function PricingPage() {
                     Join thousands of companies using our AI to hire better talent, faster.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button size="lg" variant="secondary" className="font-bold">
+                    <Button size="lg" variant="secondary" className="font-bold bg-white text-black hover:bg-white/90">
                         Start Free Trial
                     </Button>
                     <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white/10">

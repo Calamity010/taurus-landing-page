@@ -39,7 +39,7 @@ const agentData: Record<string, any> = {
 };
 
 const TrustedBy = () => (
-  <div className="py-12 bg-white border-b border-gray-100">
+  <div className="py-12 bg-background border-b border-white/10">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-mt-20">
       <p className="text-sm font-semibold tracking-wider text-slate-500 uppercase mb-8">
         TRUSTED BY MORE THAN 5,000 LEADING HR TEAMS OF ALL SIZES
@@ -47,7 +47,7 @@ const TrustedBy = () => (
       <div className="flex flex-wrap justify-center gap-x-12 gap-y-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
          {/* Placeholder Logos matching the screenshot style */}
          {['Uber', 'IBM', 'Tencent', 'Meesho', 'Reliance', 'S.K. Rathi'].map((brand) => (
-             <span key={brand} className="text-xl font-bold font-serif text-slate-800 flex items-center">{brand}</span>
+             <span key={brand} className="text-xl font-bold font-serif text-slate-300 flex items-center">{brand}</span>
          ))}
       </div>
     </div>
@@ -80,7 +80,7 @@ const Waveform = () => (
 
 const PhoneScreenerHero = () => {
     return (
-        <div className="min-h-screen bg-[#f2fcf5] font-satoshi relative overflow-hidden">
+        <div className="min-h-screen bg-background font-satoshi relative overflow-hidden">
              
              {/* Navbar Spacer */}
              <div className="h-20"></div>
@@ -102,12 +102,12 @@ const PhoneScreenerHero = () => {
                             initial={{ x: -50, opacity: 0 }}
                             animate={{ x: -100, opacity: 1 }}
                             transition={{ delay: 0.5 }}
-                            className="absolute top-1/2 -left-20 transform -translate-y-1/2 bg-[#dcfce7] border border-green-200 rounded-lg p-4 shadow-lg flex items-start gap-3 w-64 z-20 hidden lg:flex"
+                            className="absolute top-1/2 -left-20 transform -translate-y-1/2 bg-green-900/30 border border-green-500/20 rounded-lg p-4 shadow-lg flex items-start gap-3 w-64 z-20 hidden lg:flex"
                          >
                              <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-1 shrink-0">
                                  <Check className="w-4 h-4 text-white font-bold" />
                              </div>
-                             <p className="text-sm font-bold text-slate-900 leading-tight">
+                             <p className="text-sm font-bold text-white leading-tight">
                                  Auto-evaluates and scores based on job fit
                              </p>
                          </motion.div>
@@ -186,11 +186,11 @@ const PhoneScreenerHero = () => {
              <TrustedBy />
 
              {/* How it works section */}
-             <div className="py-24 bg-white relative">
+             <div className="py-24 bg-background relative">
                   <div className="max-w-4xl mx-auto px-4">
                       <div className="text-center mb-16">
-                          <h2 className="text-4xl font-bold text-slate-900 mb-4">How AI Phone Screener works</h2>
-                          <p className="text-lg text-slate-500">Automate your screening process in 5 simple steps</p>
+                          <h2 className="text-4xl font-bold text-white mb-4">How AI Phone Screener works</h2>
+                          <p className="text-lg text-slate-400">Automate your screening process in 5 simple steps</p>
                       </div>
 
                       <div className="space-y-4">
@@ -211,7 +211,7 @@ const PhoneScreenerHero = () => {
                                   </div>
                                   {item.open && (
                                       <div className="px-6 pb-6 pl-20">
-                                          <p className="text-slate-600 leading-relaxed">
+                                          <p className="text-slate-400 leading-relaxed">
                                               Configure specific languages and choose from our library of natural-sounding AI voices to best represent your company brand.
                                           </p>
                                       </div>
@@ -251,29 +251,29 @@ export default function AgentPage() {
   }, [agentId]);
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-24 font-satoshi">
+    <div className="min-h-screen bg-background pt-24 font-satoshi">
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+      <div className="relative overflow-hidden bg-[radial-gradient(#ffffff1a_1px,transparent_1px)] [background-size:16px_16px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center relative z-10">
            {/* G2 Badge Strip - mimicking the top banner */}
            <motion.div 
              initial={{ y: -20, opacity: 0 }}
              animate={{ y: 0, opacity: 1 }}
-             className="inline-flex items-center gap-2 bg-green-100 border border-green-200 rounded-full px-4 py-1.5 mb-8"
+             className="inline-flex items-center gap-2 bg-green-900/30 border border-green-500/20 rounded-full px-4 py-1.5 mb-8"
            >
              <div className="w-5 h-5 bg-red-500 rounded text-xs text-white flex items-center justify-center font-bold">G2</div>
-             <span className="text-sm font-medium text-green-800">Named G2 Grid Leader, wins 13 Badges for Summer'25</span>
+             <span className="text-sm font-medium text-green-400">Named G2 Grid Leader, wins 13 Badges for Summer'25</span>
            </motion.div>
 
-           <h1 className="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight mb-6">
+           <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight mb-6">
              {data.headline}
            </h1>
 
-           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-4 leading-relaxed">
+           <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-4 leading-relaxed">
              {data.subheadline}
            </p>
            
-           <div className="flex items-center justify-center gap-4 text-slate-600 mb-12 text-lg">
+           <div className="flex items-center justify-center gap-4 text-slate-400 mb-12 text-lg">
              {/* Replicating the "Records, Evaluates..." line with icons */}
              <span>Records 🎥</span>
              <span>,</span>
@@ -283,15 +283,19 @@ export default function AgentPage() {
            </div>
 
            {/* The Interactive Input Box */}
-           <div className="max-w-2xl mx-auto bg-white p-2 rounded-2xl shadow-xl border border-slate-200 flex items-center gap-2 mb-16 transition-transform hover:scale-[1.01] duration-300">
+           <div className="max-w-2xl mx-auto bg-card p-2 rounded-2xl shadow-xl border border-white/10 flex items-center gap-2 mb-16 transition-transform hover:scale-[1.01] duration-300">
              <div className="pl-4 text-green-500 text-xl">✨</div>
              <div className="text-lg font-mono text-slate-400">I want to hire</div>
              <input 
                type="text" 
-               className="flex-1 bg-transparent border-none focus:ring-0 text-lg font-medium text-slate-900 placeholder:text-slate-300"
+               className="flex-1 bg-transparent border-none focus:ring-0 text-lg font-medium text-white placeholder:text-slate-500"
                placeholder={typedText}
              />
-             <Button size="lg" className="rounded-xl px-8 py-6 text-lg bg-[#86efac] hover:bg-[#4ade80] text-slate-900 font-bold shadow-sm transition-all">
+             <Button 
+               size="lg" 
+               className="rounded-xl px-8 py-6 text-lg bg-[#86efac] hover:bg-[#4ade80] text-slate-900 font-bold shadow-sm transition-all"
+               onClick={() => window.location.href = '/contact-us'}
+             >
                Prepare Simulation
              </Button>
            </div>
@@ -309,10 +313,10 @@ export default function AgentPage() {
                {[1,2,3,4,5].map(i => <Star key={i} className="fill-current w-6 h-6" />)}
             </div>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
             Enterprise-Grade Video Interview Software
           </h2>
-          <p className="text-xl text-slate-800/80 font-medium">
+          <p className="text-xl text-slate-200 font-medium">
             Pricing starts as low as $1.00 per interview
           </p>
         </div>
@@ -322,11 +326,11 @@ export default function AgentPage() {
       </div>
 
       {/* How It Works Section */}
-      <div className="py-24 bg-slate-50">
+      <div className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-6">How AI Video Interview Software Works</h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-6">How AI Video Interview Software Works</h2>
+            <p className="text-xl text-slate-400 max-w-3xl mx-auto">
               Hyring's video interviewing platform conducts human-like interviews that are simple, reliable, and scalable.
             </p>
           </div>
@@ -335,22 +339,22 @@ export default function AgentPage() {
              initial={{ y: 40, opacity: 0 }}
              whileInView={{ y: 0, opacity: 1 }}
              viewport={{ once: true }}
-             className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 bg-white"
+             className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-card"
           >
              {/* Browser Frame */}
-             <div className="bg-slate-100 border-b border-slate-200 px-4 py-3 flex items-center gap-2">
+             <div className="bg-secondary border-b border-black px-4 py-3 flex items-center gap-2">
                <div className="flex gap-1.5">
                  <div className="w-3 h-3 rounded-full bg-red-400"></div>
                  <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
                  <div className="w-3 h-3 rounded-full bg-green-400"></div>
                </div>
-               <div className="ml-4 bg-white rounded-md px-3 py-1 text-xs text-slate-400 flex-1 max-w-md text-center">
+               <div className="ml-4 bg-background rounded-md px-3 py-1 text-xs text-slate-400 flex-1 max-w-md text-center">
                  app.hyring.com/interviewer
                </div>
              </div>
              
              {/* Dashboard Image */}
-             <div className="p-1 bg-slate-50">
+             <div className="p-1 bg-background">
                 <img 
                   src="/dashboard-mockup.png" 
                   alt="AI Interview Dashboard" 

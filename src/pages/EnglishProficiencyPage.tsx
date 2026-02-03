@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const EnglishProficiencyPage = () => {
   return (
-    <div className="min-h-screen bg-orange-50/30 font-sans pt-20">
+    <div className="min-h-screen bg-background font-sans pt-20">
       
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-16 pb-32">
@@ -18,22 +18,22 @@ const EnglishProficiencyPage = () => {
                animate={{ opacity: 1, x: 0 }}
                transition={{ duration: 0.6 }}
              >
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-bold mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-900/30 text-orange-400 rounded-full text-sm font-bold mb-6 border border-orange-500/20">
                     <Globe size={16} />
                     Global Hiring
                 </div>
-                <h1 className="text-5xl font-extrabold text-slate-900 leading-tight mb-6">
+                <h1 className="text-5xl font-extrabold text-white leading-tight mb-6">
                     English Proficiency Test to Hire <span className="text-orange-500">Best Talent</span>
                 </h1>
-                <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                <p className="text-lg text-slate-400 mb-8 leading-relaxed">
                     Screen candidates faster with Hyring’s AI English Proficiency Test. Assess fluency, grammar, pronunciation & CEFR levels to shortlist interview-ready talent.
                 </p>
                 
                 <div className="flex flex-wrap gap-4">
-                    <Button className="bg-orange-600 hover:bg-orange-700 text-white h-14 px-8 rounded-xl text-lg font-bold shadow-lg shadow-orange-200 transition-all">
+                    <Button onClick={() => window.location.href = '/contact-us'} className="bg-orange-600 hover:bg-orange-700 text-white h-14 px-8 rounded-xl text-lg font-bold shadow-lg shadow-orange-200 transition-all">
                         Try for Free
                     </Button>
-                    <Button variant="outline" className="h-14 px-8 rounded-xl text-lg font-medium border-slate-300 text-slate-700 hover:bg-white hover:text-orange-600">
+                    <Button variant="outline" onClick={() => window.location.href = '/contact-us'} className="h-14 px-8 rounded-xl text-lg font-medium border-slate-600 text-slate-300 hover:bg-white/10 hover:text-orange-400">
                         View Sample Report
                     </Button>
                 </div>
@@ -45,8 +45,8 @@ const EnglishProficiencyPage = () => {
                         { label: "Languages", value: "50+" },
                     ].map((stat, i) => (
                         <div key={i}>
-                            <div className="text-2xl font-bold text-slate-900">{stat.value}</div>
-                            <div className="text-sm text-slate-500">{stat.label}</div>
+                            <div className="text-2xl font-bold text-white">{stat.value}</div>
+                            <div className="text-sm text-slate-400">{stat.label}</div>
                         </div>
                     ))}
                 </div>
@@ -114,7 +114,7 @@ const EnglishProficiencyPage = () => {
       </section>
 
       {/* Skills Assessment */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-background">
            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                <div className="grid md:grid-cols-2 gap-16 items-center">
                     <div>
@@ -131,20 +131,20 @@ const EnglishProficiencyPage = () => {
                                 { title: "Grammar", desc: "Tests sentence structure and grammatical correctness." },
                             ].map((skill, i) => (
                                 <div key={i} className="flex gap-4">
-                                    <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center shrink-0 text-orange-600 font-bold">
+                                    <div className="w-10 h-10 rounded-full bg-orange-900/20 flex items-center justify-center shrink-0 text-orange-400 font-bold border border-orange-500/20">
                                         {i+1}
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-slate-900">{skill.title}</h4>
-                                        <p className="text-slate-500 text-sm">{skill.desc}</p>
+                                        <h4 className="font-bold text-white">{skill.title}</h4>
+                                        <p className="text-slate-400 text-sm">{skill.desc}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
                     
-                    <div className="bg-orange-50 rounded-3xl p-8 border border-orange-100">
-                         <h3 className="text-xl font-bold text-slate-900 mb-4 text-center">Measuring English Proficiency (CEFR)</h3>
+                    <div className="bg-card rounded-3xl p-8 border border-white/10">
+                         <h3 className="text-xl font-bold text-white mb-4 text-center">Measuring English Proficiency (CEFR)</h3>
                          <div className="space-y-2">
                              {[
                                  { level: "C2", title: "Proficient", color: "bg-green-600" },
@@ -154,11 +154,11 @@ const EnglishProficiencyPage = () => {
                                  { level: "A2", title: "Elementary", color: "bg-orange-400" },
                                  { level: "A1", title: "Beginner", color: "bg-red-500" },
                              ].map((lvl, i) => (
-                                 <div key={i} className="flex items-center gap-4 p-3 bg-white rounded-xl shadow-sm">
+                                 <div key={i} className="flex items-center gap-4 p-3 bg-background rounded-xl shadow-sm border border-white/5">
                                      <div className={`w-12 h-12 rounded-lg ${lvl.color} text-white flex items-center justify-center font-bold text-xl`}>
                                          {lvl.level}
                                      </div>
-                                     <span className="font-medium text-slate-700">{lvl.title}</span>
+                                     <span className="font-medium text-slate-300">{lvl.title}</span>
                                  </div>
                              ))}
                          </div>
@@ -172,7 +172,7 @@ const EnglishProficiencyPage = () => {
             <div className="max-w-4xl mx-auto px-4">
                  <h2 className="text-3xl md:text-5xl font-bold mb-6">Enterprise-Grade Interview Automation</h2>
                  <p className="text-xl text-slate-300 mb-8">Pricing starts as low as <span className="text-orange-400 font-bold">$1.00</span> per interview</p>
-                 <Button className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-6 text-lg rounded-full">
+                 <Button onClick={() => window.location.href = '/contact-us'} className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-6 text-lg rounded-full">
                      Get Started
                  </Button>
             </div>

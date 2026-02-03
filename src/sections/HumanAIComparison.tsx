@@ -6,7 +6,7 @@ export default function HumanAIComparison() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>();
 
   return (
-    <section ref={ref} className="py-20 bg-primary/5">
+    <section ref={ref} className="py-20 bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -14,9 +14,9 @@ export default function HumanAIComparison() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-slate-600 mb-2">Optimize your company&apos;s...</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-            Human + Taurus Hire AI Interviewer
+          <p className="text-slate-400 mb-2">Optimize your company&apos;s...</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            Human + Taurus AI Interviewer
           </h2>
         </motion.div>
 
@@ -27,14 +27,14 @@ export default function HumanAIComparison() {
           className="grid md:grid-cols-2 gap-6"
         >
           {/* Human Side */}
-          <div className="bg-white rounded-2xl shadow-soft p-8">
+          <div className="bg-card rounded-2xl shadow-soft p-8">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center">
-                <User className="w-7 h-7 text-slate-600" />
+              <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center">
+                <User className="w-7 h-7 text-slate-400" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-slate-900">Human</h3>
-                <p className="text-slate-500">Traditional interviewer</p>
+                <h3 className="text-xl font-bold text-white">Human</h3>
+                <p className="text-slate-400">Traditional interviewer</p>
               </div>
             </div>
 
@@ -43,38 +43,38 @@ export default function HumanAIComparison() {
                 <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
                   <X className="w-4 h-4 text-red-500" />
                 </div>
-                <span className="text-slate-600">Limited availability</span>
+                <span className="text-slate-400">Limited availability</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
                   <X className="w-4 h-4 text-red-500" />
                 </div>
-                <span className="text-slate-600">Inconsistent evaluation</span>
+                <span className="text-slate-400">Inconsistent evaluation</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
                   <X className="w-4 h-4 text-red-500" />
                 </div>
-                <span className="text-slate-600">Time zone constraints</span>
+                <span className="text-slate-400">Time zone constraints</span>
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-slate-100">
+            <div className="mt-8 pt-6 border-t border-white/10">
               <div className="text-center">
-                <span className="text-5xl font-bold text-slate-400">1</span>
-                <p className="text-slate-500 mt-2">Concurrent interview</p>
+                <span className="text-5xl font-bold text-slate-500">1</span>
+                <p className="text-slate-400 mt-2">Concurrent interview</p>
               </div>
             </div>
           </div>
 
           {/* AI Side */}
-          <div className="bg-gradient-to-br from-primary to-blue-700 rounded-2xl shadow-glow-lg p-8 text-white">
+          <div className="bg-gradient-to-br from-blue-600 to-blue-900 rounded-2xl shadow-glow-lg p-8 text-white">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center">
                 <Bot className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold">Taurus Hire AI Interviewer</h3>
+                <h3 className="text-xl font-bold">Taurus AI Interviewer</h3>
                 <p className="text-blue-100">AI-powered solution</p>
               </div>
             </div>

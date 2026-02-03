@@ -15,12 +15,12 @@ export default function AnnouncementBanner() {
         className="flex items-center gap-8 py-2.5 whitespace-nowrap"
       >
         {[...Array(4)].map((_, i) => (
-          <div key={i} className="flex items-center gap-2 text-white text-sm font-medium">
+          <div key={i} className="flex items-center gap-2 text-black text-sm font-medium">
             <Award className="w-4 h-4" />
-            <span>Taurus Hire Named G2 Grid Leader, wins 13 Badges for Summer&apos;25</span>
+            <span>Taurus Named G2 Grid Leader, wins 13 Badges for Summer&apos;25</span>
             <span className="mx-4">•</span>
             <Award className="w-4 h-4" />
-            <span>Taurus Hire Named G2 Grid Leader, wins 13 Badges for Summer&apos;25</span>
+            <span>Taurus Named G2 Grid Leader, wins 13 Badges for Summer&apos;25</span>
             <span className="mx-4">•</span>
           </div>
         ))}

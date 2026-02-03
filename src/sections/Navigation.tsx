@@ -91,8 +91,8 @@ export default function Navigation() {
         transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={`fixed top-10 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-xl shadow-soft border-b border-slate-200/50 py-2'
-            : 'bg-white/80 backdrop-blur-sm py-4'
+            ? 'bg-background/95 backdrop-blur-xl shadow-soft border-b border-white/10 py-2'
+            : 'bg-background/80 backdrop-blur-sm py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,9 +100,9 @@ export default function Navigation() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 group">
               <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-                <Briefcase className="w-5 h-5 text-white" />
+                <Briefcase className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-slate-900">Taurus Hire</span>
+              <span className="text-xl font-bold text-white">Taurus</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -111,11 +111,11 @@ export default function Navigation() {
                 <NavigationMenuList>
                   {/* AI Agents Dropdown */}
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-[15px] font-medium text-slate-700 hover:text-primary hover:bg-transparent bg-transparent focus:bg-transparent focus:text-primary data-[active]:bg-transparent data-[state=open]:bg-transparent">
+                    <NavigationMenuTrigger className="text-[15px] font-medium text-slate-300 hover:text-white hover:bg-transparent bg-transparent focus:bg-transparent focus:text-white data-[active]:bg-transparent data-[state=open]:bg-transparent">
                       AI Agents
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-1 lg:w-[600px] bg-white rounded-xl shadow-xl">
+                      <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-1 lg:w-[600px] bg-popover rounded-xl shadow-xl border border-white/10">
                         {aiAgents.map((agent) => (
                           <ListItem key={agent.title} title={agent.title} href={agent.href}>
                             {agent.description}
@@ -130,7 +130,7 @@ export default function Navigation() {
                       <button
                         className={cn(
                           navigationMenuTriggerStyle(),
-                          "text-[15px] font-medium text-slate-700 hover:text-primary hover:bg-transparent bg-transparent focus:bg-transparent focus:text-primary data-[active]:bg-transparent cursor-pointer"
+                          "text-[15px] font-medium text-slate-300 hover:text-white hover:bg-transparent bg-transparent focus:bg-transparent focus:text-white data-[active]:bg-transparent cursor-pointer"
                         )}
                         onClick={() => navigate('/pricing')}
                       >
@@ -141,11 +141,11 @@ export default function Navigation() {
 
                    {/* Resources Dropdown */}
                    <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-[15px] font-medium text-slate-700 hover:text-primary hover:bg-transparent bg-transparent focus:bg-transparent focus:text-primary data-[active]:bg-transparent data-[state=open]:bg-transparent">
+                    <NavigationMenuTrigger className="text-[15px] font-medium text-slate-300 hover:text-white hover:bg-transparent bg-transparent focus:bg-transparent focus:text-white data-[active]:bg-transparent data-[state=open]:bg-transparent">
                       Resources
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-[600px] gap-3 p-6 md:w-[700px] lg:w-[800px] grid-cols-2 bg-white rounded-xl shadow-xl">
+                      <ul className="grid w-[600px] gap-3 p-6 md:w-[700px] lg:w-[800px] grid-cols-2 bg-popover rounded-xl shadow-xl border border-white/10">
                         {resourceItems.map((item) => (
                           <ListItem key={item.title} title={item.title} href={item.href}>
                             {item.description}
@@ -157,14 +157,14 @@ export default function Navigation() {
 
                   {/* Use Cases Dropdown */}
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-[15px] font-medium text-slate-700 hover:text-primary hover:bg-transparent bg-transparent focus:bg-transparent focus:text-primary data-[active]:bg-transparent data-[state=open]:bg-transparent">
+                    <NavigationMenuTrigger className="text-[15px] font-medium text-slate-300 hover:text-white hover:bg-transparent bg-transparent focus:bg-transparent focus:text-white data-[active]:bg-transparent data-[state=open]:bg-transparent">
                       Use Cases
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="p-6 md:w-[600px] lg:w-[700px] bg-white rounded-xl shadow-xl">
+                      <div className="p-6 md:w-[600px] lg:w-[700px] bg-popover rounded-xl shadow-xl border border-white/10">
                         <div className="mb-6">
-                          <h4 className="text-lg font-bold leading-none mb-2 text-slate-900">Industry Use Cases</h4>
-                          <p className="text-sm text-slate-500 leading-snug">
+                          <h4 className="text-lg font-bold leading-none mb-2 text-white">Industry Use Cases</h4>
+                          <p className="text-sm text-slate-400 leading-snug">
                             Discover real-world examples of how our AI transforms hiring across industries.
                           </p>
                         </div>
@@ -174,7 +174,7 @@ export default function Navigation() {
                              <NavigationMenuLink asChild>
                                <Link
                                  to={`/use-cases/${industry.toLowerCase().replace(/ & /g, '-').replace(/\s+/g, '-')}`}
-                                 className="flex items-center justify-between select-none rounded-md py-2 leading-none no-underline outline-none transition-colors hover:text-primary text-[15px] font-medium text-slate-700 group/item"
+                                 className="flex items-center justify-between select-none rounded-md py-2 leading-none no-underline outline-none transition-colors hover:text-primary text-[15px] font-medium text-slate-300 group/item"
                                  onClick={() => setIsMobileMenuOpen(false)}
                                >
                                  {industry}
@@ -195,26 +195,29 @@ export default function Navigation() {
             <div className="hidden md:flex items-center gap-3">
               <Button
                 variant="ghost"
-                className="text-slate-700 hover:text-primary hover:bg-primary/5 font-medium"
+                className="text-slate-300 hover:text-white hover:bg-white/5 font-medium"
               >
                 <User className="w-4 h-4 mr-2" />
                 Login
                 <ChevronDown className="w-4 h-4 ml-1" />
               </Button>
-              <Button className="bg-primary text-white hover:bg-primary-800 rounded-full px-6 py-2.5 font-medium shadow-glow hover:shadow-glow-lg transition-all duration-300 hover:scale-[1.02]">
-                Buy Now
+              <Button 
+                onClick={() => navigate('/contact-us')}
+                className="bg-primary text-black hover:bg-zinc-200 rounded-full px-6 py-2.5 font-medium shadow-glow hover:shadow-glow-lg transition-all duration-300 hover:scale-[1.02]"
+              >
+                Contact Us
               </Button>
             </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              className="md:hidden p-2 rounded-lg hover:bg-white/5 transition-colors"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-slate-700" />
+                <X className="w-6 h-6 text-white" />
               ) : (
-                <Menu className="w-6 h-6 text-slate-700" />
+                <Menu className="w-6 h-6 text-white" />
               )}
             </button>
           </div>
@@ -237,29 +240,29 @@ export default function Navigation() {
             />
             <motion.div
               initial={{ x: '100%' }}
-              animate={{ x: 0 }}
+              animate={{ x: '0%' }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.3 }}
-              className="absolute right-0 top-0 h-full w-[280px] bg-white shadow-2xl overflow-y-auto"
+              className="absolute right-0 top-0 h-full w-[280px] bg-background shadow-2xl overflow-y-auto border-l border-white/10"
             >
               <div className="pt-24 px-6 pb-8">
                 <div className="flex flex-col gap-2">
                   <div className="px-4 py-2">
-                    <h3 className="text-sm font-semibold text-slate-500 mb-2 uppercase tracking-wider">AI Agents</h3>
+                    <h3 className="text-sm font-semibold text-slate-400 mb-2 uppercase tracking-wider">AI Agents</h3>
                     <div className="flex flex-col gap-2 pl-2">
-                      {aiAgents.map((agent) => (
-                         <Link key={agent.title} to={agent.href} onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 hover:text-primary py-1 block text-sm">{agent.title}</Link>
+                       {aiAgents.map((agent) => (
+                         <Link key={agent.title} to={agent.href} onClick={() => setIsMobileMenuOpen(false)} className="text-slate-300 hover:text-white py-1 block text-sm">{agent.title}</Link>
                       ))}
                     </div>
                   </div>
                   
-                  <button onClick={() => navigate('/pricing')} className="px-4 py-2 text-lg font-medium text-slate-700 hover:text-primary block text-left w-full">Pricing</button>
+                  <button onClick={() => navigate('/pricing')} className="px-4 py-2 text-lg font-medium text-slate-300 hover:text-white block text-left w-full">Pricing</button>
 
                   <div className="px-4 py-2">
                     <h3 className="text-sm font-semibold text-slate-500 mb-2 uppercase tracking-wider">Resources</h3>
                     <div className="flex flex-col gap-2 pl-2">
                       {resourceItems.slice(0, 5).map((item) => (
-                         <Link key={item.title} to={item.href} onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 hover:text-primary py-1 block text-sm">{item.title}</Link>
+                         <Link key={item.title} to={item.href} onClick={() => setIsMobileMenuOpen(false)} className="text-slate-300 hover:text-white py-1 block text-sm">{item.title}</Link>
                       ))}
                       <Link to="/resources/blog" className="text-primary text-sm font-medium">View detailed list...</Link>
                     </div>
@@ -269,7 +272,7 @@ export default function Navigation() {
                     <h3 className="text-sm font-semibold text-slate-500 mb-2 uppercase tracking-wider">Use Cases</h3>
                     <div className="flex flex-col gap-2 pl-2">
                       {industries.slice(0, 6).map((industry) => (
-                         <Link key={industry} to={`/use-cases/${industry.toLowerCase().replace(/ & /g, '-').replace(/\s+/g, '-')}`} onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 hover:text-primary py-1 block text-sm">{industry}</Link>
+                         <Link key={industry} to={`/use-cases/${industry.toLowerCase().replace(/ & /g, '-').replace(/\s+/g, '-')}`} onClick={() => setIsMobileMenuOpen(false)} className="text-slate-300 hover:text-white py-1 block text-sm">{industry}</Link>
                       ))}
                        <Link to="/use-cases/retail" className="text-primary text-sm font-medium">View all industries...</Link>
                     </div>
@@ -284,8 +287,11 @@ export default function Navigation() {
                     <User className="w-4 h-4 mr-2" />
                     Login
                   </Button>
-                  <Button className="w-full bg-primary text-white rounded-full hover:bg-primary-800">
-                    Buy Now
+                  <Button 
+                    onClick={() => navigate('/contact-us')}
+                    className="w-full bg-primary text-black rounded-full hover:bg-zinc-200"
+                  >
+                    Contact Us
                   </Button>
                 </div>
               </div>
@@ -311,12 +317,12 @@ const ListItem = React.forwardRef<
             <Link
               to={href!}
               className={cn(
-                "block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-50 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
+                "block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-white/5 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
                 className
               )}
             >
-              <div className="text-[15px] font-semibold leading-none text-slate-900 group-hover:text-primary transition-colors">{title}</div>
-              <p className="line-clamp-2 text-sm leading-relaxed text-slate-500 mt-1.5 font-normal">
+              <div className="text-[15px] font-semibold leading-none text-white group-hover:text-white transition-colors">{title}</div>
+              <p className="line-clamp-2 text-sm leading-relaxed text-slate-400 mt-1.5 font-normal">
                 {children}
               </p>
             </Link>
@@ -332,13 +338,13 @@ const ListItem = React.forwardRef<
           ref={ref}
           href={href}
           className={cn(
-            "block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-50 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
+            "block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-white/5 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
             className
           )}
           {...props}
         >
-          <div className="text-[15px] font-semibold leading-none text-slate-900 group-hover:text-primary transition-colors">{title}</div>
-          <p className="line-clamp-2 text-sm leading-relaxed text-slate-500 mt-1.5 font-normal">
+          <div className="text-[15px] font-semibold leading-none text-white group-hover:text-white transition-colors">{title}</div>
+          <p className="line-clamp-2 text-sm leading-relaxed text-slate-400 mt-1.5 font-normal">
             {children}
           </p>
         </a>

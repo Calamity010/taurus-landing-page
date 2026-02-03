@@ -12,7 +12,7 @@ export default function UseCasePage() {
 
 
   return (
-    <div className="min-h-screen bg-white font-sans selection:bg-blue-100 pt-20">
+    <div className="min-h-screen bg-background font-sans selection:bg-blue-500/30 pt-20">
       
       {/* Hero Section */}
       <section className="relative pt-40 pb-20 bg-[#0A0A0A] text-white overflow-hidden bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:20px_20px]">
@@ -82,7 +82,7 @@ export default function UseCasePage() {
                                 className="w-full bg-[#222] border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all placeholder:text-slate-500"
                             />
                         </div>
-                        <Button className="w-full bg-green-500 hover:bg-green-600 text-[#020b08] font-extrabold h-14 rounded-xl text-lg mt-2 transition-all hover:scale-[1.02]">
+                        <Button onClick={() => window.location.href = '/contact-us'} className="w-full bg-green-500 hover:bg-green-600 text-[#020b08] font-extrabold h-14 rounded-xl text-lg mt-2 transition-all hover:scale-[1.02]">
                             BOOK A CONSULTATION
                         </Button>
                     </form>
@@ -96,12 +96,12 @@ export default function UseCasePage() {
       </section>
 
       {/* Awards Section */}
-      <section className="py-10 border-b border-slate-100 bg-white">
+      <section className="py-10 border-b border-white/10 bg-background">
           <div className="max-w-7xl mx-auto px-4 text-center">
               <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-8">Trusted by Global Leaders</p>
               <div className="flex flex-wrap justify-center gap-12 lg:gap-20 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
                   {['CNBC', 'Economic Times', 'YourStory', 'Startuppedia', 'Forbes'].map((logo, i) => (
-                      <span key={i} className="text-xl md:text-2xl font-serif text-slate-800 font-bold flex items-center">{logo}</span>
+                      <span key={i} className="text-xl md:text-2xl font-serif text-slate-300 font-bold flex items-center">{logo}</span>
                   ))}
               </div>
           </div>
@@ -113,18 +113,18 @@ export default function UseCasePage() {
               {data.solutions?.map((item: any, i: number) => (
                   <div key={i} className={`flex flex-col lg:flex-row gap-16 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
                       <div className="flex-1 space-y-6">
-                            <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 mb-4">
+                            <div className="w-12 h-12 rounded-xl bg-blue-900/30 flex items-center justify-center text-blue-400 mb-4 border border-blue-500/20">
                                 <Zap size={24} />
                             </div>
-                            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight">
+                            <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight">
                                 {item.title}
                             </h2>
-                            <p className="text-lg text-slate-600 leading-relaxed">
+                            <p className="text-lg text-slate-400 leading-relaxed">
                                 {item.desc}
                             </p>
                             <ul className="space-y-3 pt-4">
                                 {['Real-time evaluation', 'Detailed analytic reports', 'Seamless integration'].map((feat, k) => (
-                                    <li key={k} className="flex items-center gap-3 text-slate-700 font-medium">
+                                    <li key={k} className="flex items-center gap-3 text-slate-300 font-medium">
                                         <CheckCircle2 size={20} className="text-green-500" />
                                         {feat}
                                     </li>
@@ -132,11 +132,11 @@ export default function UseCasePage() {
                             </ul>
                       </div>
                       <div className="flex-1 relative">
-                          <div className={`absolute top-0 w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-3xl transform ${i % 2 === 0 ? 'rotate-3' : '-rotate-3'} scale-95`}></div>
+                          <div className={`absolute top-0 w-full h-full bg-gradient-to-br from-blue-900/10 to-purple-900/10 rounded-3xl transform ${i % 2 === 0 ? 'rotate-3' : '-rotate-3'} scale-95`}></div>
                           <img 
                             src={data.heroImage} // In a real app, use item specific images
                             alt={item.title} 
-                            className="relative rounded-3xl shadow-2xl border border-slate-200 w-full object-cover h-[400px]"
+                            className="relative rounded-3xl shadow-2xl border border-white/10 w-full object-cover h-[400px]"
                           />
                       </div>
                   </div>
@@ -148,20 +148,20 @@ export default function UseCasePage() {
       <SavingsSection />
 
       {/* FAQ Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-background">
           <div className="max-w-3xl mx-auto px-4">
               <div className="text-center mb-16">
-                  <h2 className="text-4xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
+                  <h2 className="text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
               </div>
 
               <div className="space-y-4">
                   {data.faqs?.map((faq: any, i: number) => (
-                      <div key={i} className="group bg-slate-50 hover:bg-white p-6 rounded-2xl border border-transparent hover:border-slate-200 hover:shadow-lg transition-all cursor-pointer">
-                          <h3 className="text-lg font-bold text-slate-900 mb-2 flex justify-between items-center">
+                      <div key={i} className="group bg-card hover:bg-white/5 p-6 rounded-2xl border border-white/5 hover:border-white/10 hover:shadow-lg transition-all cursor-pointer">
+                          <h3 className="text-lg font-bold text-white mb-2 flex justify-between items-center">
                               {faq.question}
                               <ChevronDown className="text-slate-400 group-hover:text-blue-500 transition-colors" size={20} />
                           </h3>
-                          <p className="text-slate-600 leading-relaxed hidden group-hover:block transition-all">
+                          <p className="text-slate-400 leading-relaxed hidden group-hover:block transition-all">
                               {faq.answer}
                           </p>
                       </div>
@@ -176,10 +176,10 @@ export default function UseCasePage() {
           <div className="max-w-4xl mx-auto px-4 relative z-10">
               <h2 className="text-3xl md:text-5xl font-bold mb-8">Ready to Transform Your {industryId?.replace('-', ' ')} Hiring?</h2>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <Button className="bg-white text-blue-600 hover:bg-slate-100 px-10 py-6 rounded-full font-bold text-lg shadow-xl">
+                  <Button onClick={() => window.location.href = '/contact-us'} className="bg-white text-blue-600 hover:bg-slate-100 px-10 py-6 rounded-full font-bold text-lg shadow-xl">
                       Book a Demo
                   </Button>
-                  <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 px-10 py-6 rounded-full font-bold text-lg">
+                  <Button variant="outline" onClick={() => window.location.href = '/contact-us'} className="border-white/30 text-white hover:bg-white/10 px-10 py-6 rounded-full font-bold text-lg">
                       Start Free Trial
                   </Button>
               </div>

@@ -97,21 +97,21 @@ const ResourcesListPage = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] font-sans pt-20">
+    <div className="min-h-screen bg-background font-sans pt-20">
       
       {/* Hero Section */}
-      <section className="bg-white border-b border-slate-200">
+      <section className="bg-background border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
             
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-bold mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm font-bold mb-6 border border-blue-500/20">
                 <Globe size={14} />
                 Knowledge Bank
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 font-display">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-display">
                 {data.title}
             </h1>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
                 {data.description}
             </p>
 
@@ -122,7 +122,7 @@ const ResourcesListPage = () => {
                 </div>
                 <input
                     type="text"
-                    className="block w-full pl-11 pr-4 py-4 border border-slate-200 rounded-xl bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition-all"
+                    className="block w-full pl-11 pr-4 py-4 border border-white/10 rounded-xl bg-secondary text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition-all"
                     placeholder={`Search in ${data.title}...`}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -142,21 +142,21 @@ const ResourcesListPage = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.05 }}
-                        className="bg-white p-6 rounded-2xl border border-slate-200 hover:shadow-lg hover:border-blue-200 transition-all group cursor-pointer"
+                        className="bg-card p-6 rounded-2xl border border-white/10 hover:shadow-lg hover:border-blue-500/30 transition-all group cursor-pointer"
                       >
                           <div className="flex items-start justify-between mb-4">
-                              <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded uppercase tracking-wider">
+                              <span className="px-2 py-1 bg-secondary text-slate-300 text-xs font-bold rounded uppercase tracking-wider">
                                   {item.cat}
                               </span>
-                              <Download className="w-4 h-4 text-slate-300 group-hover:text-blue-500 transition-colors" />
+                              <Download className="w-4 h-4 text-slate-500 group-hover:text-blue-500 transition-colors" />
                           </div>
-                          <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                          <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
                               {item.ti}
                           </h3>
-                          <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                          <p className="text-slate-400 text-sm leading-relaxed mb-6">
                               {item.desc}
                           </p>
-                          <div className="flex items-center text-blue-600 text-sm font-bold mt-auto opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0">
+                          <div className="flex items-center text-blue-400 text-sm font-bold mt-auto opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0">
                               View Details <ChevronRight size={16} className="ml-1" />
                           </div>
                       </motion.div>
@@ -173,7 +173,7 @@ const ResourcesListPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-slate-900 py-16 text-center text-white">
+      <section className="bg-secondary py-16 text-center text-white">
           <div className="max-w-4xl mx-auto px-4">
               <h2 className="text-3xl font-bold mb-6">Need more specialized HR resources?</h2>
               <p className="text-slate-300 mb-8 max-w-2xl mx-auto">

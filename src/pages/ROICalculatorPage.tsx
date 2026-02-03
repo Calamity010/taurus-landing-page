@@ -15,18 +15,18 @@ const ROICalculatorPage = () => {
   const timeSavedHours = applicants * (screenTime / 60);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans pt-20">
+    <div className="min-h-screen bg-background font-sans pt-20">
        
-       <section className="bg-white border-b border-slate-200 py-16">
+       <section className="bg-background border-b border-white/10 py-16">
            <div className="max-w-4xl mx-auto px-4 text-center">
-               <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold mb-6">
+               <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-900/30 text-green-400 rounded-full text-sm font-bold mb-6 border border-green-500/20">
                     <Calculator size={14} />
                     Free Tool
                </div>
-               <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+               <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
                    ROI Calculator
                </h1>
-               <p className="text-xl text-slate-600">
+               <p className="text-xl text-slate-400">
                    Measure your hiring time and savings. See how much you can save by switching to AI-driven recruitment.
                </p>
            </div>
@@ -36,19 +36,19 @@ const ROICalculatorPage = () => {
             <div className="grid md:grid-cols-2 gap-12 items-start">
                 
                 {/* Inputs */}
-                <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
-                    <h3 className="text-xl font-bold text-slate-900 mb-6">Input your hiring metrics</h3>
+                <div className="bg-card p-8 rounded-2xl shadow-lg border border-white/10">
+                    <h3 className="text-xl font-bold text-white mb-6">Input your hiring metrics</h3>
                     
                     <div className="space-y-6">
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-3">Number of applications to screen</label>
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">Number of applications to screen</label>
                             <div className="relative">
                                 <Users className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"/>
                                 <input 
                                     type="number" 
                                     value={applicants}
                                     onChange={(e) => setApplicants(Number(e.target.value))}
-                                    className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full pl-10 pr-4 py-3 bg-secondary border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                                 />
                             </div>
                             <input 
@@ -61,27 +61,27 @@ const ROICalculatorPage = () => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-3">Average Recruiter Salary (Yearly)</label>
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">Average Recruiter Salary (Yearly)</label>
                             <div className="relative">
                                 <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"/>
                                 <input 
                                     type="number" 
                                     value={salary}
                                     onChange={(e) => setSalary(Number(e.target.value))}
-                                    className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full pl-10 pr-4 py-3 bg-secondary border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-3">Minutes spent screening one candidate</label>
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">Minutes spent screening one candidate</label>
                             <div className="relative">
                                 <Clock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"/>
                                 <input 
                                     type="number" 
                                     value={screenTime}
                                     onChange={(e) => setScreenTime(Number(e.target.value))}
-                                    className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full pl-10 pr-4 py-3 bg-secondary border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                                 />
                             </div>
                         </div>
@@ -89,7 +89,7 @@ const ROICalculatorPage = () => {
                 </div>
 
                 {/* Results */}
-                <div className="bg-slate-900 text-white p-8 rounded-2xl shadow-xl relative overflow-hidden">
+                <div className="bg-card text-white p-8 rounded-2xl shadow-xl relative overflow-hidden border border-white/10">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl -translate-y-32 translate-x-32"></div>
                     
                     <h3 className="text-xl font-bold mb-8 relative z-10">Projected Savings with Hyring</h3>

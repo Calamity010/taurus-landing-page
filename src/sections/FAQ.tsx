@@ -14,15 +14,15 @@ const faqs = [
   },
   {
     question: 'Which tools can the AI Interviewer integrate with?',
-    answer: 'Taurus Hire integrates seamlessly with popular ATS platforms including Greenhouse, Lever, Workday, and BambooHR. We also support integrations with calendar systems like Google Calendar and Outlook, communication tools like Slack and Microsoft Teams, and video conferencing platforms. Our API allows for custom integrations with your existing HR tech stack.',
+    answer: 'Taurus integrates seamlessly with popular ATS platforms including Greenhouse, Lever, Workday, and BambooHR. We also support integrations with calendar systems like Google Calendar and Outlook, communication tools like Slack and Microsoft Teams, and video conferencing platforms. Our API allows for custom integrations with your existing HR tech stack.',
   },
   {
     question: 'Do you offer a free trial for your AI recruiting software?',
     answer: 'Yes! We offer a 14-day free trial with full access to all features. You can conduct up to 10 interviews during the trial period. No credit card is required to start. Our team will also provide a personalized onboarding session to help you get the most out of the platform.',
   },
   {
-    question: 'Is Taurus Hire SOC 2 Type 2 compliant?',
-    answer: 'Yes, Taurus Hire is SOC 2 Type 2 certified. We undergo regular third-party audits to ensure we meet the highest standards for security, availability, processing integrity, confidentiality, and privacy. We are also GDPR compliant and follow strict data protection protocols.',
+    question: 'Is Taurus SOC 2 Type 2 compliant?',
+    answer: 'Yes, Taurus is SOC 2 Type 2 certified. We undergo regular third-party audits to ensure we meet the highest standards for security, availability, processing integrity, confidentiality, and privacy. We are also GDPR compliant and follow strict data protection protocols.',
   },
   {
     question: 'How many programming languages are supported?',
@@ -46,7 +46,7 @@ export default function FAQ() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>();
 
   return (
-    <section ref={ref} id="faq" className="py-20 bg-primary/5">
+    <section ref={ref} id="faq" className="py-20 bg-secondary/10">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -54,7 +54,7 @@ export default function FAQ() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Frequently Asked Questions
           </h2>
         </motion.div>
@@ -69,12 +69,12 @@ export default function FAQ() {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-white rounded-xl border border-slate-200 px-6 data-[state=open]:shadow-soft transition-shadow"
+                className="bg-card rounded-xl border border-white/10 px-6 data-[state=open]:shadow-soft transition-shadow"
               >
-                <AccordionTrigger className="text-left font-semibold text-slate-900 hover:text-primary py-4">
+                <AccordionTrigger className="text-left font-semibold text-white hover:text-primary py-4">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-slate-600 pb-4">
+                <AccordionContent className="text-slate-400 pb-4">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

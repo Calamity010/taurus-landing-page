@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import SampleReportModal from '@/components/SampleReportModal';
 import { Video, BarChart3, Shield, Check } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -30,10 +32,11 @@ const checkItems = [
 ];
 
 export default function AIFeatures() {
+  const [showReportModal, setShowReportModal] = useState(false);
   const { ref, isVisible } = useScrollAnimation<HTMLElement>();
 
   return (
-    <section ref={ref} id="features" className="py-20 bg-primary/5">
+    <section ref={ref} id="features" className="py-20 bg-secondary/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,12 +44,12 @@ export default function AIFeatures() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             <span className="gradient-text">AI Recruiting</span>
             <br />
             Software
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
             Our AI recruitment software empowers scaling teams and enterprises to streamline the hiring process with intelligent AI agents.
           </p>
         </motion.div>
@@ -73,10 +76,10 @@ export default function AIFeatures() {
                     <Icon className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-slate-900 mb-2">
+                    <h3 className="text-xl font-semibold text-white mb-2">
                       {feature.title}
                     </h3>
-                    <p className="text-slate-600 leading-relaxed">
+                    <p className="text-slate-400 leading-relaxed">
                       {feature.description}
                     </p>
                   </div>
@@ -92,7 +95,7 @@ export default function AIFeatures() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="relative"
           >
-            <div className="bg-white rounded-3xl shadow-soft-lg p-8">
+            <div className="bg-card rounded-3xl shadow-soft-lg p-8">
               {/* Progress Circle */}
               <div className="flex items-center justify-center mb-8">
                 <div className="relative w-32 h-32">
@@ -102,7 +105,7 @@ export default function AIFeatures() {
                       cy="50"
                       r="45"
                       fill="none"
-                      stroke="#e2e8f0"
+                      stroke="#333"
                       strokeWidth="8"
                     />
                     <motion.circle
@@ -126,8 +129,8 @@ export default function AIFeatures() {
                     </defs>
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-3xl font-bold text-slate-900">80%</span>
-                    <span className="text-xs text-slate-500">Score Obtained</span>
+                    <span className="text-3xl font-bold text-white">80%</span>
+                    <span className="text-xs text-slate-400">Score Obtained</span>
                   </div>
                 </div>
               </div>
@@ -145,7 +148,7 @@ export default function AIFeatures() {
                     <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
                       <Check className="w-3 h-3 text-white" />
                     </div>
-                    <span className="text-sm text-slate-700">{item}</span>
+                    <span className="text-sm text-slate-300">{item}</span>
                   </motion.div>
                 ))}
               </div>
@@ -155,7 +158,8 @@ export default function AIFeatures() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: 1 }}
-                className="mt-6 w-full py-3 px-4 bg-slate-100 hover:bg-slate-200 rounded-xl text-sm font-medium text-slate-700 transition-colors flex items-center justify-center gap-2"
+                onClick={() => setShowReportModal(true)}
+                className="mt-6 w-full py-3 px-4 bg-secondary hover:bg-secondary/80 rounded-xl text-sm font-medium text-slate-300 transition-colors flex items-center justify-center gap-2"
               >
                 <BarChart3 className="w-4 h-4" />
                 Share Report
@@ -168,6 +172,7 @@ export default function AIFeatures() {
           </motion.div>
         </div>
       </div>
+      <SampleReportModal open={showReportModal} onOpenChange={setShowReportModal} />
     </section>
   );
 }

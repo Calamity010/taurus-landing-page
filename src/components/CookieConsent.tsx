@@ -32,7 +32,7 @@ export default function CookieConsent() {
         >
           <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6">
             <h3 className="text-lg font-semibold text-slate-900 mb-2">
-              Taurus Hire uses cookies
+              Taurus uses cookies
             </h3>
             <p className="text-sm text-slate-600 mb-4">
               By using our service you consent to all cookies in accordance with our cookie policy. For more details, refer to our{' '}

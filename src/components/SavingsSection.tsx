@@ -17,7 +17,7 @@ export default function SavingsSection() {
   const savedMoney = Math.round(savedHours * 50); // $50/hr cost
 
   return (
-    <section className="py-24 bg-slate-900 text-white">
+    <section className="py-24 bg-background text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">
           Your potential yearly savings with Hyring
@@ -68,7 +68,7 @@ export default function SavingsSection() {
               </div>
               
               <div className="mt-8 flex justify-center">
-                  <Button className="bg-white text-slate-900 hover:bg-slate-200 px-8 py-6 rounded-full font-bold text-lg">
+                  <Button className="bg-primary text-black hover:bg-primary/90 px-8 py-6 rounded-full font-bold text-lg">
                       Calculate your ROI
                   </Button>
               </div>

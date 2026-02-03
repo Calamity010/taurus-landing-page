@@ -28,7 +28,7 @@ export default function TrustedCompanies() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>();
 
   return (
-    <section ref={ref} className="py-16 bg-white">
+    <section ref={ref} className="py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -36,11 +36,11 @@ export default function TrustedCompanies() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Trusted by more than 5,000 leading HR teams of all sizes
           </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">
-            Teams choose Taurus Hire&apos;s AI interview software to make interviews simple, structured, and deliver a better candidate experience.
+          <p className="text-slate-400 max-w-2xl mx-auto">
+            Teams choose Taurus&apos;s AI interview software to make interviews simple, structured, and deliver a better candidate experience.
           </p>
         </motion.div>
 
@@ -58,7 +58,7 @@ export default function TrustedCompanies() {
               transition={{ duration: 0.4, delay: index * 0.03 }}
               className="flex items-center justify-center group"
             >
-              <span className="text-lg font-semibold text-slate-400 group-hover:text-primary transition-colors duration-300 cursor-default">
+              <span className="text-lg font-semibold text-slate-500 group-hover:text-white transition-colors duration-300 cursor-default">
                 {company.display}
               </span>
             </motion.div>
