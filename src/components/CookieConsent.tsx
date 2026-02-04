@@ -30,20 +30,20 @@ export default function CookieConsent() {
           transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="fixed bottom-4 left-4 z-50 max-w-sm"
         >
-          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6">
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">
+          <div className="bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-800 p-6">
+            <h3 className="text-lg font-semibold text-white mb-2">
               Taurus uses cookies
             </h3>
-            <p className="text-sm text-slate-600 mb-4">
+            <p className="text-sm text-zinc-400 mb-4">
               By using our service you consent to all cookies in accordance with our cookie policy. For more details, refer to our{' '}
-              <a href="#" className="text-primary hover:underline">
+              <a href="/resources/privacy-policy" className="text-primary hover:underline">
                 Privacy Policy
               </a>
               .
             </p>
             <Button
               onClick={handleAccept}
-              className="w-full bg-primary text-white hover:bg-primary-800"
+              className="w-full bg-primary text-black hover:bg-zinc-200 font-bold"
             >
               GOT IT
             </Button>
