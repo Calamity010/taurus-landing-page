@@ -1,8 +1,8 @@
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Vapi from '@vapi-ai/web';
 import { Button } from '@/components/ui/button';
-import { Mic, X, Loader2, Volume2, StopCircle } from 'lucide-react';
+import { Mic, X, Volume2, StopCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const vapiKey = 
@@ -19,6 +19,8 @@ interface VoiceInterviewerProps {
 export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerProps) {
   const [status, setStatus] = useState<'idle' | 'connecting' | 'active' | 'error'>('idle');
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [transcript, setTranscript] = useState<Record<string, string>[]>([]);
+  const assistantIdRef = useRef<string | null>(null);
   
   // Debug logging
   useEffect(() => {
@@ -31,6 +33,29 @@ export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerPr
     }
   }, [isOpen]);
 
+  const sendTranscriptToBackend = useCallback(async (finalTranscript: typeof transcript, assistantId: string | null) => {
+    if (finalTranscript.length === 0) return;
+
+    try {
+      const apiBaseUrl = import.meta.env.NEXT_PUBLIC_API_BACKEND_BASE_URL || '';
+      await fetch(`${apiBaseUrl.replace(/\/$/, '')}/api/landing-page/conversation`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          assistantId: "freja",
+          callId: assistantId,
+          transcript: finalTranscript,
+          endedAt: new Date().toISOString(),
+        }),
+      });
+      console.log('Transcript saved to backend successfully');
+    } catch (err) {
+      console.error('Failed to save transcript:', err);
+    }
+  }, []);
+
   useEffect(() => {
     if (!isOpen) {
       vapi.stop();
@@ -38,14 +63,33 @@ export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerPr
       return;
     }
 
+    // Clear any existing listeners to prevent duplicates
+    vapi.removeAllListeners();
+
     // Configure event listeners
     vapi.on('call-start', () => {
       setStatus('active');
+      setTranscript([]); // Reset transcript for new session
     });
 
     vapi.on('call-end', () => {
       setStatus('idle');
-      onClose(); // Auto close on end? optional
+      // Use functional state to get the most updated transcript for sending
+      setTranscript(prev => {
+        sendTranscriptToBackend(prev, assistantIdRef.current);
+        return prev;
+      });
+      onClose();
+    });
+
+    vapi.on('message', (message: any) => {
+      if (message.type === 'transcript' && message.transcriptType === 'final') {
+        const key = message.role === 'assistant' ? 'ai' : 'user';
+        setTranscript(prev => [
+          ...prev,
+          { [key]: message.transcript }
+        ]);
+      }
     });
 
     vapi.on('speech-start', () => {
@@ -56,10 +100,6 @@ export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerPr
       setIsSpeaking(false);
     });
 
-    vapi.on('volume-level', () => {
-      // setVolumeLevel(level);
-    });
-
     vapi.on('error', (e) => {
       console.error(e);
       setStatus('error');
@@ -67,8 +107,9 @@ export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerPr
 
     return () => {
       vapi.stop();
+      vapi.removeAllListeners();
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, sendTranscriptToBackend]);
 
   const startCall = useCallback(async () => {
     if (!vapiKey) {
@@ -79,33 +120,28 @@ export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerPr
 
     setStatus('connecting');
     try {
-      // Define a simple interviewer assistant
-      const assistant = {
-        name: "Taurus Reviewer",
-        firstMessage: "Hello! I'm your AI Interviewer from Taurus. I'd love to chat about your background. Shall we begin?",
-        transcriber: {
-          provider: "deepgram" as const,
-          model: "nova-2",
-          language: "en-US" as const,
+      const apiBaseUrl = import.meta.env.NEXT_PUBLIC_API_BACKEND_BASE_URL || '';
+      const response = await fetch(`${apiBaseUrl.replace(/\/$/, '')}/api/landing-page/vapi-assistant`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        voice: {
-          provider: "11labs" as const,
-          voiceId: "burt",
-        },
-        model: {
-          provider: "openai" as const,
-          model: "gpt-3.5-turbo" as const,
-          messages: [
-            {
-              role: "system" as const,
-              content: "You are a professional and friendly AI interviewer for Taurus Hire. Your goal is to conduct a preliminary screening interview. Ask about the candidate's background, experience, and what they are looking for in a new role. Be concise and conversational. Keep responses under 2-3 sentences."
-            }
-          ]
-        },
-        recordingEnabled: false,
-      };
+      });
 
-      await vapi.start(assistant);
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const assistantId = data.assistantId || data.assistant_id || data.id || data.data?.assistantId;
+
+      if (!assistantId) {
+        throw new Error("Assistant ID not found in API response");
+      }
+
+      console.log('Starting Vapi with assistant ID:', assistantId);
+      assistantIdRef.current = assistantId;
+      await vapi.start(assistantId);
     } catch (err) {
       console.error("Failed to start call:", err);
       setStatus('error');
@@ -183,8 +219,106 @@ export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerPr
 
             {status === 'connecting' && (
               <div className="flex flex-col items-center">
-                <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
-                <p className="text-zinc-300">Establishing connection...</p>
+                <div className="relative w-48 h-48 mb-12 flex items-center justify-center">
+                  {/* Aurora Background Glows */}
+                  <motion.div
+                    animate={{
+                      rotate: 360,
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 10,
+                      ease: "linear"
+                    }}
+                    className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-purple-500/20 to-blue-400/30 blur-3xl rounded-full"
+                  />
+                  <motion.div
+                    animate={{
+                      rotate: -360,
+                      scale: [1.1, 1, 1.1],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 12,
+                      ease: "linear"
+                    }}
+                    className="absolute inset-0 bg-gradient-to-bl from-blue-400/20 via-transparent to-primary/30 blur-3xl rounded-full"
+                  />
+                  
+                  {/* Morphing AI Magic Sphere */}
+                  <motion.div
+                    animate={{
+                      borderRadius: [
+                        "40% 60% 70% 30% / 40% 50% 60% 50%",
+                        "60% 40% 30% 70% / 50% 60% 50% 40%",
+                        "50% 50% 50% 50% / 50% 50% 50% 50%",
+                        "40% 60% 70% 30% / 40% 50% 60% 50%",
+                      ],
+                      scale: [1, 1.05, 0.95, 1],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 6,
+                      ease: "easeInOut"
+                    }}
+                    className="relative z-10 w-32 h-32 bg-gradient-to-br from-primary via-blue-500 to-purple-600 shadow-[0_0_50px_rgba(59,130,246,0.5)] flex items-center justify-center overflow-hidden"
+                  >
+                    {/* Inner Shimmer */}
+                    <motion.div
+                      animate={{
+                        x: ['-100%', '100%'],
+                      }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: 2,
+                        ease: "linear"
+                      }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+                    />
+                    <Mic className="w-12 h-12 text-black/80 relative z-20" />
+                  </motion.div>
+
+                  {/* Orbiting Energy Particles */}
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      animate={{
+                        rotate: 360,
+                      }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: 3 + i,
+                        ease: "linear"
+                      }}
+                      className="absolute inset-0"
+                    >
+                      <motion.div 
+                        animate={{
+                          scale: [1, 1.5, 1],
+                          opacity: [0.3, 0.8, 0.3],
+                        }}
+                        transition={{
+                          repeat: Infinity,
+                          duration: 2,
+                          delay: i * 0.5,
+                        }}
+                        className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_#3b82f6] absolute top-[-5px] left-1/2" 
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+                
+                <div className="space-y-3 relative z-20">
+                  <motion.h4 
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                    className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-primary to-white tracking-tight"
+                  >
+                    Summoning Taurus AI
+                  </motion.h4>
+                  <p className="text-zinc-400 font-medium">Synchronizing neural pathways...</p>
+                </div>
               </div>
             )}
 
