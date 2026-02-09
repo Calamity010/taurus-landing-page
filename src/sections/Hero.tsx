@@ -15,7 +15,6 @@ import {
   Users,
   ArrowRight,
   Briefcase,
-  Cloud,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -179,128 +178,7 @@ export default function Hero() {
           </svg>
         </div>
 
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-           {/* Cloud 1 - Massive, Very Slow, Top Layer */}
-           <motion.div
-              initial={{ x: '5vw' }}
-              animate={{ x: '110vw' }}
-              transition={{ repeat: Infinity, duration: 85, ease: "linear" }}
-              className="absolute top-[5%] left-0 text-zinc-800/40"
-           >
-              <motion.div
-                animate={{ y: [0, -30, 10, -15, 0] }}
-                transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
-              >
-                  <Cloud size={300} fill="currentColor" />
-              </motion.div>
-           </motion.div>
 
-           {/* Cloud 2 - Large, Drifting Height */}
-           <motion.div
-              initial={{ x: '40vw' }}
-              animate={{ x: '110vw' }}
-              transition={{ repeat: Infinity, duration: 65, ease: "linear" }}
-              className="absolute top-[15%] left-0 text-zinc-900/30"
-           >
-               <motion.div
-                  animate={{ y: [0, 40, -20, 10, 0] }}
-                  transition={{ repeat: Infinity, duration: 25, ease: "easeInOut" }}
-               >
-                  <Cloud size={180} fill="currentColor" />
-               </motion.div>
-           </motion.div>
-           
-           {/* Cloud 3 - Fast, High */}
-           <motion.div
-              initial={{ x: -150 }}
-              animate={{ x: '110vw' }}
-              transition={{ repeat: Infinity, duration: 45, ease: "linear", delay: 0 }}
-              className="absolute top-[8%] left-0 text-white/5"
-           >
-               <motion.div
-                  animate={{ y: [0, -15, 15, 0] }}
-                  transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
-               >
-                  <Cloud size={120} fill="currentColor" />
-               </motion.div>
-           </motion.div>
-
-           {/* Cloud 4 - Big, Lower Layer */}
-           <motion.div
-              initial={{ x: '75vw' }}
-              animate={{ x: '110vw' }}
-              transition={{ repeat: Infinity, duration: 70, ease: "linear" }}
-              className="absolute top-[30%] left-0 text-zinc-800/30"
-           >
-               <motion.div
-                  animate={{ y: [0, -25, 25, -10, 0] }}
-                  transition={{ repeat: Infinity, duration: 30, ease: "easeInOut" }}
-               >
-                  <Cloud size={240} fill="currentColor" />
-               </motion.div>
-           </motion.div>
-
-            {/* Cloud 5 - Fast, Scatter */}
-           <motion.div
-              initial={{ x: -100 }}
-              animate={{ x: '110vw' }}
-              transition={{ repeat: Infinity, duration: 35, ease: "linear", delay: 15 }}
-              className="absolute top-[20%] left-0 text-zinc-700/40"
-           >
-               <motion.div
-                  animate={{ y: [0, 20, -20, 0] }}
-                  transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
-               >
-                  <Cloud size={90} fill="currentColor" />
-               </motion.div>
-           </motion.div>
-
-           {/* Cloud 6 - Text Layer: Slow */}
-           <motion.div
-              initial={{ x: '25vw' }}
-              animate={{ x: '110vw' }}
-              transition={{ repeat: Infinity, duration: 80, ease: "linear" }}
-              className="absolute top-[12%] left-0 text-zinc-800/20"
-           >
-               <motion.div
-                  animate={{ y: [0, -40, 20, -10, 0] }}
-                  transition={{ repeat: Infinity, duration: 40, ease: "easeInOut" }}
-               >
-                  <Cloud size={200} fill="currentColor" />
-               </motion.div>
-           </motion.div>
-
-           {/* Cloud 7 - Text Layer: Fast */}
-           <motion.div
-              initial={{ x: -100 }}
-              animate={{ x: '110vw' }}
-              transition={{ repeat: Infinity, duration: 40, ease: "linear", delay: 5 }}
-              className="absolute top-[28%] left-0 text-slate-200/40"
-           >
-               <motion.div
-                  animate={{ y: [0, 30, -30, 10, 0] }}
-                  transition={{ repeat: Infinity, duration: 22, ease: "easeInOut" }}
-               >
-                  <Cloud size={110} fill="currentColor" />
-               </motion.div>
-           </motion.div>
-
-            {/* Cloud 8 - Background */}
-           <motion.div
-              initial={{ x: '10vw' }}
-              animate={{ x: '110vw' }}
-              transition={{ repeat: Infinity, duration: 100, ease: "linear" }}
-              className="absolute top-[22%] left-0 text-zinc-900/20"
-           >
-               <motion.div
-                  animate={{ y: [0, -50, 50, 0] }}
-                  transition={{ repeat: Infinity, duration: 60, ease: "easeInOut" }}
-               >
-                  <Cloud size={350} fill="currentColor" />
-               </motion.div>
-           </motion.div>
-        </div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 pt-24">
