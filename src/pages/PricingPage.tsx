@@ -9,12 +9,15 @@ import {
   Languages, 
   Code, 
   Mic, 
-  FileText
+  FileText,
+  Layout,
+  ListChecks
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import TrustedCompanies from '@/sections/TrustedCompanies';
 
 const currencies = {
   USD: { symbol: '$', rate: 1 },
@@ -139,11 +142,12 @@ const features = [
 ];
 
 const creditCosts = [
-  { service: 'English Proficiency Test', cost: 1, icon: Languages },
-  { service: 'AI Resume Screener', cost: 0.25, icon: FileText },
-  { service: 'AI Phone Screener', cost: 0.5, icon: Mic },
-  { service: 'AI Video Interviewer', cost: 1, icon: FileVideo },
-  { service: 'AI Coding Interviewer', cost: 1, icon: Code },
+  { service: 'Resume Screener', cost: 1, icon: FileText },
+  { service: 'Verbal Interviewer', cost: 1, icon: Mic },
+  { service: 'Technical Interviewer', cost: 0.5, icon: FileVideo },
+  { service: 'Coding Interviewer', cost: 0.5, icon: Code },
+  { service: 'System Design Interview', cost: 1, icon: Layout },
+  { service: 'MCQ', cost: 0.5, icon: ListChecks },
 ];
 
 export default function PricingPage() {
@@ -181,7 +185,7 @@ export default function PricingPage() {
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none -translate-x-1/2 translate-y-1/2" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-30 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -208,7 +212,7 @@ export default function PricingPage() {
                   <ChevronDown className="w-4 h-4 text-slate-400" />
                 </button>
                 {showCurrencyDropdown && (
-                  <div className="absolute top-full mt-2 left-0 bg-[#222] border border-white/10 rounded-lg shadow-xl py-1 z-20 min-w-[120px] overflow-hidden">
+                  <div className="absolute top-full mt-2 left-0 bg-[#222] border border-white/10 rounded-xl shadow-xl z-50 min-w-[120px] overflow-hidden">
                     {Object.keys(currencies).map((curr) => (
                       <button
                         key={curr}
@@ -216,7 +220,7 @@ export default function PricingPage() {
                           setCurrency(curr as keyof typeof currencies);
                           setShowCurrencyDropdown(false);
                         }}
-                        className="block w-full text-left px-4 py-2 text-sm text-slate-300 hover:bg-white/5 hover:text-white"
+                        className="block w-full text-left px-4 py-2.5 text-sm text-slate-300 hover:bg-white/10 hover:text-white transition-colors"
                       >
                         {curr}
                       </button>
@@ -321,6 +325,8 @@ export default function PricingPage() {
             </div>
           ))}
         </div>
+
+        <TrustedCompanies />
 
         {/* Feature Comparison Table */}
         <div className="mb-20">
@@ -485,8 +491,8 @@ export default function PricingPage() {
         <div className="mt-20 text-center bg-primary rounded-3xl p-12 relative overflow-hidden">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
             <div className="relative z-10">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to transform your hiring?</h2>
-                <p className="text-primary-100 max-w-2xl mx-auto mb-8 text-lg">
+                <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">Ready to transform your hiring?</h2>
+                <p className="text-primary-foreground/70 max-w-2xl mx-auto mb-8 text-lg">
                     Join thousands of companies using our AI to hire better talent, faster.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">

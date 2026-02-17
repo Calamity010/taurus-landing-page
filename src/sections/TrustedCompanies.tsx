@@ -1,69 +1,91 @@
-import { motion } from 'framer-motion';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { useState } from 'react';
 
+// Curated list of companies with logos that are likely to display well
 const companies = [
-  { name: 'NOBROKER', display: 'NOBROKER' },
-  { name: 'IBM', display: 'IBM' },
-  { name: 'Uber', display: 'Uber' },
-  { name: 'Whatfix', display: 'Whatfix' },
-  { name: 'Cuemath', display: 'Cuemath' },
-  { name: 'OPENCARE', display: 'OPENCARE' },
-  { name: 'WORLDLINE', display: 'WORLDLINE' },
-  { name: 'Tencent', display: 'Tencent' },
-  { name: 'masai', display: 'masai' },
-  { name: 'abbvie', display: 'abbvie' },
-  { name: 'klenty', display: 'klenty' },
-  { name: 'ParentPay', display: 'ParentPay' },
-  { name: 'SOBHA', display: 'SOBHA' },
-  { name: 'TCS', display: 'TCS' },
-  { name: 'S.K. Rathi', display: 'S.K. Rathi & Co.' },
-  { name: 'Reliance', display: 'Reliance' },
-  { name: 'SAINT-GOBAIN', display: 'SAINT-GOBAIN' },
-  { name: 'Forage AI', display: 'Forage AI' },
-  { name: 'meesho', display: 'meesho' },
-  { name: 'HINDUJA', display: 'HINDUJA TECH' },
+  { name: 'IBM', domain: 'ibm.com' },
+  { name: 'Whatfix', domain: 'whatfix.com' },
+  { name: 'Cuemath', domain: 'cuemath.com' },
+  { name: 'Tencent', domain: 'tencent.com' },
+  { name: 'Masai', domain: 'masaischool.com' },
+  { name: 'Saint-Gobain', domain: 'saint-gobain.com' },
+  { name: 'Meesho', domain: 'meesho.com' },
+  { name: 'PhonePe', domain: 'phonepe.com' },
+  { name: 'Zoho', domain: 'zoho.com' },
+  { name: 'Freshworks', domain: 'freshworks.com' },
 ];
 
-export default function TrustedCompanies() {
-  const { ref, isVisible } = useScrollAnimation<HTMLElement>();
+const CompanyLogo = ({ name, domain }: { name: string; domain: string }) => {
+  const [imgSrc, setImgSrc] = useState(`https://logo.clearbit.com/${domain}`);
+  const [error, setError] = useState(false);
+
+  const handleError = () => {
+    if (imgSrc.includes('clearbit')) {
+      // Fallback to Google Favicon service for better reliability
+      setImgSrc(`https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://${domain}&size=128`);
+    } else {
+      setError(true);
+    }
+  };
+
+  if (error) {
+    return null;
+  }
 
   return (
-    <section ref={ref} className="py-16 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            Trusted by more than 5,000 leading HR teams of all sizes
-          </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
-            Teams choose Taurus&apos;s AI interview software to make interviews simple, structured, and deliver a better candidate experience.
-          </p>
-        </motion.div>
+    <div className="flex items-center justify-center px-10 md:px-14 shrink-0 group">
+      <img
+        src={imgSrc}
+        alt={`${name} logo`}
+        className="h-7 md:h-9 w-auto object-contain transition-all duration-500 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110"
+        onError={handleError}
+      />
+    </div>
+  );
+};
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isVisible ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-10 gap-8 items-center"
-        >
-          {companies.map((company, index) => (
-            <motion.div
-              key={company.name}
-              initial={{ opacity: 0, y: 10 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: index * 0.03 }}
-              className="flex items-center justify-center group"
-            >
-              <span className="text-lg font-semibold text-slate-500 group-hover:text-white transition-colors duration-300 cursor-default">
-                {company.display}
-              </span>
-            </motion.div>
-          ))}
-        </motion.div>
+const MarqueeRow = ({ items }: { items: typeof companies }) => {
+  return (
+    <div className="flex overflow-hidden group select-none">
+      <div 
+        className="flex items-center animate-marquee py-4"
+        style={{ animationDuration: '40s' }}
+      >
+        {/* Duplicate items for seamless flow */}
+        {[...items, ...items].map((company, i) => (
+          <CompanyLogo key={`${company.name}-${i}-a`} {...company} />
+        ))}
+      </div>
+      <div 
+        aria-hidden="true"
+        className="flex items-center animate-marquee py-4"
+        style={{ animationDuration: '40s' }}
+      >
+        {[...items, ...items].map((company, i) => (
+          <CompanyLogo key={`${company.name}-${i}-b`} {...company} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default function TrustedCompanies() {
+  return (
+    <section className="py-24 bg-background relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10 text-center">
+        <h2 className="text-xl md:text-2xl font-semibold text-slate-300 mb-6 tracking-tight">
+          Trusted by more than <span className="text-white">5,000+</span> leading HR teams of all sizes
+        </h2>
+        <p className="text-slate-500 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+          Teams choose Taurus's AI interview software to make interviews simple, structured, and deliver a better candidate experience.
+        </p>
+      </div>
+
+      <div className="relative w-full flex items-center py-10 bg-white/[0.02] border-y border-white/[0.05]">
+        {/* Premium Gradient Masks for Soft Fade Effect */}
+        <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-gradient-to-r from-background via-background/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-gradient-to-l from-background via-background/80 to-transparent z-10 pointer-events-none" />
+
+        <MarqueeRow items={companies} />
       </div>
     </section>
   );

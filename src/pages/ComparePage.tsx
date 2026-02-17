@@ -1,8 +1,29 @@
 
+import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Check, X, Zap } from 'lucide-react';
+import { competitors } from '@/data/competitorData';
 
 const ComparePage = () => {
+  const { competitorId } = useParams();
+
+  // Determine which data to show
+  const competitorData = competitorId && competitors[competitorId.toLowerCase()] ? competitors[competitorId.toLowerCase()] : null;
+
+  const competitorName = competitorData ? competitorData.name : "Other Platforms";
+  const description = competitorData ? competitorData.description : "Discover why Taurus is the smarter choice for modern recruitment.";
+  
+  const features = competitorData ? competitorData.features : [
+       { feature: "AI Model Accuracy", taurus: "89%", competitor: "70% (Industry Standard)" },
+       { feature: "Live Proctoring Params", taurus: "10+", competitor: "3-5" },
+       { feature: "Setup Time", taurus: "2 Minutes", competitor: "1-2 Weeks" },
+       { feature: "Pricing Model", taurus: "Pay Per Interview", competitor: "Subscription / Seat" },
+       { feature: "Resume Parsing", taurus: true, competitor: true },
+       { feature: "AI Voice Agents", taurus: true, competitor: false },
+       { feature: "Customizable Avatar", taurus: true, competitor: false },
+       { feature: "Cheating Detection", taurus: "Advanced Computer Vision", competitor: "Basic Browser Lock" },
+  ];
+
   return (
     <div className="min-h-screen bg-background font-sans pt-20">
        
@@ -10,10 +31,10 @@ const ComparePage = () => {
            <div className="max-w-7xl mx-auto px-4 text-center">
                <span className="text-blue-500 font-bold tracking-wider text-sm uppercase mb-4 block">Competitive Landscape</span>
                <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6">
-                   Hyring vs. The Rest
+                   Taurus vs. {competitorName}
                </h1>
                <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-10">
-                   Discover why Hyring is the smarter choice for modern recruitment. 
+                   {description} 
                    <span className="text-white font-semibold block mt-2">2X faster screening compared to others.</span>
                </p>
            </div>
@@ -27,41 +48,32 @@ const ComparePage = () => {
                    <div className="col-span-4 text-center">
                        <div className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-xl shadow-lg">
                            <Zap size={18} fill="currentColor" />
-                           <span className="font-bold text-lg">Hyring</span>
+                           <span className="font-bold text-lg">Taurus</span>
                        </div>
                    </div>
                    <div className="col-span-4 text-center text-slate-400 font-bold text-lg">
-                       Other Platforms
+                       {competitorName}
                    </div>
                </div>
 
                {/* Rows */}
-               {[
-                   { feature: "AI Model Accuracy", hyring: "89%", others: "70% (Industry Standard)" },
-                   { feature: "Live Proctoring Params", hyring: "10+", others: "3-5" },
-                   { feature: "Setup Time", hyring: "2 Minutes", others: "1-2 Weeks" },
-                   { feature: "Pricing Model", hyring: "Pay Per Interview", others: "Subscription / Seat" },
-                   { feature: "Resume Parsing", hyring: true, others: true },
-                   { feature: "AI Voice Agents", hyring: true, others: false },
-                   { feature: "Customizable Avatar", hyring: true, others: false },
-                   { feature: "Cheating Detection", hyring: "Advanced Computer Vision", others: "Basic Browser Lock" },
-               ].map((row, i) => (
+               {features.map((row, i) => (
                    <div key={i} className={`grid grid-cols-12 p-6 items-center ${i % 2 === 0 ? 'bg-card' : 'bg-secondary/30'} border-b border-white/5 last:border-0 hover:bg-blue-900/20 transition-colors`}>
                        <div className="col-span-4 font-semibold text-slate-300">{row.feature}</div>
                        <div className="col-span-4 text-center flex justify-center">
-                           {row.hyring === true ? (
+                           {row.taurus === true ? (
                                <div className="w-8 h-8 bg-green-900/30 rounded-full flex items-center justify-center text-green-400"><Check size={20} strokeWidth={3} /></div>
                            ) : (
-                               <span className="font-bold text-white text-lg">{row.hyring}</span>
+                               <span className="font-bold text-white text-lg">{row.taurus}</span>
                            )}
                        </div>
                        <div className="col-span-4 text-center flex justify-center opacity-60">
-                            {row.others === false ? (
+                            {row.competitor === false ? (
                                 <div className="w-8 h-8 bg-red-900/30 rounded-full flex items-center justify-center text-red-400"><X size={20} strokeWidth={3} /></div>
-                            ) : row.others === true ? (
+                            ) : row.competitor === true ? (
                                 <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-slate-400"><Check size={20} /></div>
                             ) : (
-                                <span className="font-medium text-slate-400">{row.others}</span>
+                                <span className="font-medium text-slate-400">{String(row.competitor)}</span>
                             )}
                        </div>
                    </div>
@@ -72,7 +84,7 @@ const ComparePage = () => {
        {/* Savings Section */}
        <section className="py-20 bg-secondary text-white">
            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-               <h2 className="text-3xl font-bold mb-16">Your potential yearly savings with Hyring</h2>
+               <h2 className="text-3xl font-bold mb-16">Your potential yearly savings with Taurus</h2>
                
                <div className="grid md:grid-cols-3 gap-8">
                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">

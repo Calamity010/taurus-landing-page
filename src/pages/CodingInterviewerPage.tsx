@@ -167,11 +167,11 @@ const CodingInterviewerPage = () => {
       </section>
       
       {/* Pricing CTA */}
-      <section className="py-20 bg-primary text-white text-center">
+      <section className="py-20 bg-primary text-center">
             <div className="max-w-4xl mx-auto px-4">
-                 <h2 className="text-4xl font-bold text-white mb-4">Enterprise-Grade Coding Interview Platform</h2>
-                 <p className="text-xl text-blue-100 mb-8">Pricing starts as low as <strong className="text-black bg-white px-2 py-1 rounded">$1.00</strong> per interview</p>
-                 <Button onClick={() => window.location.href = '/contact-us'} className="bg-white text-black hover:bg-slate-200 font-bold px-8 py-6 text-lg rounded-full shadow-xl transition-all hover:scale-[1.02]">
+                 <h2 className="text-4xl font-bold text-primary-foreground mb-4">Enterprise-Grade Coding Interview Platform</h2>
+                 <p className="text-xl text-primary-foreground/70 mb-8">Pricing starts as low as <strong className="text-white bg-black px-2 py-1 rounded">$1.00</strong> per interview</p>
+                 <Button onClick={() => window.location.href = '/contact-us'} className="bg-black text-white hover:bg-black/90 font-bold px-8 py-6 text-lg rounded-full shadow-xl transition-all hover:scale-[1.02]">
                      Transform Your Hiring
                  </Button>
             </div>

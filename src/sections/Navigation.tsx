@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, User, Briefcase, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronDown, User, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
@@ -37,9 +37,14 @@ const aiAgents = [
     href: "/ai-coding-interviewer"
   },
   {
-    title: "English Proficiency Test",
-    description: "Assess English communication skills with AI to identify top talent instantly.",
-    href: "/english-proficiency-test"
+    title: "AI MCQs",
+    description: "Rapidly screen technical knowledge and aptitude with secure, automated assessments.",
+    href: "/ai-mcqs"
+  },
+  {
+    title: "AI System Design Interview",
+    description: "Evaluate architectural decisions, scalability, and system components interactively.",
+    href: "/ai-system-design-interview"
   }
 ];
 
@@ -98,11 +103,12 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 group">
-              <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-                <Briefcase className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold text-white">Taurus</span>
+            <Link to="/" className="flex items-center group">
+              <img 
+                src="/logo.png" 
+                alt="Taurus Logo" 
+                className="h-9 w-auto object-contain"
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -196,6 +202,7 @@ export default function Navigation() {
               <Button
                 variant="ghost"
                 className="text-slate-300 hover:text-white hover:bg-white/5 font-medium"
+                onClick={() => window.location.href = 'https://hr.thetaurus.ai/auth/login'}
               >
                 <User className="w-4 h-4 mr-2" />
                 Login
@@ -283,6 +290,7 @@ export default function Navigation() {
                   <Button
                     variant="outline"
                     className="w-full justify-center"
+                    onClick={() => window.location.href = 'https://hr.thetaurus.ai/auth/login'}
                   >
                     <User className="w-4 h-4 mr-2" />
                     Login

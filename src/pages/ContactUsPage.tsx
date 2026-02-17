@@ -227,7 +227,7 @@ export default function ContactUsPage() {
                      <Button 
                         type="submit" 
                         disabled={isSubmitting}
-                        className="w-full h-12 bg-primary hover:bg-primary-600 text-white font-semibold rounded-xl text-base shadow-glow transition-all"
+                        className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl text-base shadow-glow transition-all"
                       >
                        {isSubmitting ? (
                          <span className="flex items-center gap-2">
@@ -268,7 +268,7 @@ export default function ContactUsPage() {
                   whileHover={{ y: -5 }}
                   className="bg-secondary p-8 rounded-2xl border border-white/10 hover:shadow-lg transition-all"
                 >
-                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 text-primary">
+                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 text-primary-foreground">
                     <Globe className="w-6 h-6" />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">{office.city}</h3>

@@ -91,6 +91,7 @@ function App() {
 
         {/* Resource Routes */}
         <Route path="/resources/compare" element={<ComparePage />} />
+        <Route path="/resources/compare/:competitorId" element={<ComparePage />} />
         <Route path="/resources/roi-calculator" element={<ROICalculatorPage />} />
         <Route path="/resources/credits-calculator" element={<CreditsCalculatorPage />} />
         <Route path="/resources/help-centre" element={<HelpCentrePage />} />

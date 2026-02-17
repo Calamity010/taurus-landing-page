@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Video, Phone, FileText, Code, Check, ArrowRight } from 'lucide-react';
+import { Video, Phone, FileText, Code, Cpu, ClipboardList, Check, ArrowRight } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const suiteItems = [
@@ -49,6 +49,30 @@ const suiteItems = [
       'Real-time code execution',
       'AI-powered cheat detection',
       'Automated code quality analysis',
+    ],
+  },
+  {
+    id: 'mcqs',
+    title: 'AI MCQs',
+    icon: ClipboardList,
+    description: 'Rapid technical and aptitude screening with automated grading.',
+    features: [
+      'Customizable question banks',
+      'Cheat-proof timed assessments',
+      'Instant grading and scoring',
+      'Topic-wise performance analytics',
+    ],
+  },
+  {
+    id: 'system-design',
+    title: 'AI system design interview',
+    icon: Cpu,
+    description: 'Evaluate architectural skills with interactive whiteboard sessions.',
+    features: [
+      'Interactive architectural discussions',
+      'Assess scalability and trade-offs',
+      'Real-time design feedback',
+      'Comprehensive system design report',
     ],
   },
 ];

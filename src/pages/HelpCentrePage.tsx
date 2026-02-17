@@ -4,8 +4,8 @@ import { Search, HelpCircle, MessageCircle, BookOpen } from 'lucide-react';
 const HelpCentrePage = () => {
     return (
         <div className="min-h-screen bg-background font-sans pt-20">
-            <section className="bg-primary text-white py-20 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+            <section className="bg-primary text-primary-foreground py-20 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-black/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
                 <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
                     <h1 className="text-4xl font-bold mb-6">How can we help you?</h1>
                     
@@ -13,7 +13,7 @@ const HelpCentrePage = () => {
                         <input 
                           type="text" 
                           placeholder="Search for answers..."
-                          className="w-full pl-12 pr-4 py-4 rounded-xl text-white bg-white/10 placeholder-slate-300 focus:outline-none focus:ring-4 focus:ring-blue-500/30 shadow-2xl border border-white/10"
+                          className="w-full pl-12 pr-4 py-4 rounded-xl text-primary-foreground bg-black/5 placeholder-slate-500 focus:outline-none focus:ring-4 focus:ring-blue-500/30 shadow-lg border border-black/10"
                         />
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
                     </div>

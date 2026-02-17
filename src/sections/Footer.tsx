@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { Briefcase } from 'lucide-react';
 
 const quickLinks = [
   { label: 'Manifesto', href: '#' },
@@ -15,7 +15,8 @@ const aiAgents = [
   { label: 'AI Phone Screener', href: '#' },
   { label: 'AI Resume Screener', href: '#' },
   { label: 'AI Coding Interviewer', href: '#' },
-  { label: 'English Proficiency Test', href: '#' },
+  { label: 'AI MCQs', href: '#' },
+  { label: 'AI System Design Interview', href: '#' },
 ];
 
 const useCases = [
@@ -37,17 +38,14 @@ const useCases = [
 ];
 
 const comparisons = [
-  { label: 'Taurus vs Babblebots', href: '#' },
-  { label: 'Taurus vs Micro1', href: '#' },
-  { label: 'Taurus vs Mindely', href: '#' },
-  { label: 'Taurus vs Apriora', href: '#' },
-  { label: 'Taurus vs Sapia', href: '#' },
-  { label: 'Taurus vs Upscreen', href: '#' },
-  { label: 'Taurus vs Fairgo', href: '#' },
-  { label: 'Taurus vs Evalgator', href: '#' },
-  { label: 'Taurus vs Incruiter', href: '#' },
-  { label: 'Taurus vs Interviewer.ai', href: '#' },
-  { label: 'Taurus vs Talently', href: '#' },
+  { label: 'Taurus vs Babblebots', href: '/resources/compare/babblebots' },
+  { label: 'Taurus vs Micro1', href: '/resources/compare/micro1' },
+  { label: 'Taurus vs Mindely', href: '/resources/compare/mindely' },
+  { label: 'Taurus vs Apriora', href: '/resources/compare/apriora' },
+  { label: 'Taurus vs Sapia', href: '/resources/compare/sapia' },
+  { label: 'Taurus vs Upscreen', href: '/resources/compare/upscreen' },
+  { label: 'Taurus vs Fairgo', href: '/resources/compare/fairgo' },
+  { label: 'Taurus vs Evalgator', href: '/resources/compare/evalgator' },
 ];
 
 const socialLinks = [
@@ -169,11 +167,12 @@ export default function Footer() {
         >
           {/* Logo & Certifications */}
           <div className="flex items-center gap-6 mb-6 md:mb-0">
-            <a href="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <Briefcase className="w-6 h-6 text-black" />
-              </div>
-              <span className="text-2xl font-bold">Taurus</span>
+            <a href="/" className="flex items-center">
+              <img 
+                src="/logo.png" 
+                alt="Taurus Logo" 
+                className="h-10 w-auto object-contain"
+              />
             </a>
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-xs font-bold text-blue-400 border border-blue-500/30">
@@ -215,12 +214,21 @@ export default function Footer() {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-slate-300 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </a>
+                  {link.href.startsWith('/') ? (
+                    <Link
+                      to={link.href}
+                      className="text-slate-300 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-slate-300 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -272,12 +280,12 @@ export default function Footer() {
             <ul className="space-y-2 max-h-64 overflow-y-auto">
               {comparisons.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-slate-300 hover:text-white transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
