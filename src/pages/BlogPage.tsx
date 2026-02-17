@@ -25,7 +25,7 @@ export default function BlogPage() {
     const fetchPosts = async () => {
       try {
         const baseUrl = import.meta.env.NEXT_PUBLIC_API_BACKEND_BASE_URL;
-        const response = await fetch(`${baseUrl}/api/medium/technology`);
+        const response = await fetch(`${baseUrl}api/medium/technology`);
         const data: BlogResponse = await response.json();
         if (data.success) {
           setPosts(data.data);
