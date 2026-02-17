@@ -12,7 +12,6 @@ import SoftwareSuite from '@/sections/SoftwareSuite';
 import HumanAIComparison from '@/sections/HumanAIComparison';
 import Pricing from '@/sections/Pricing';
 import Stats from '@/sections/Stats';
-import FeaturedIn from '@/sections/FeaturedIn';
 import FAQ from '@/sections/FAQ';
 import Footer from '@/sections/Footer';
 import ROICalculator from '@/sections/ROICalculator';
@@ -47,7 +46,6 @@ const HomePage = () => (
     <Pricing />
     <Stats />
     <ROICalculator />
-    <FeaturedIn />
     <FAQ />
   </main>
 );

@@ -11,7 +11,9 @@ import {
   Mic, 
   FileText,
   Layout,
-  ListChecks
+  ListChecks,
+  Users,
+  Calculator
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
@@ -31,42 +33,42 @@ const plans = [
     name: 'Lite',
     monthlyPrice: 124,
     yearlyPrice: 99,
-    credits: 20,
+    credits: 150,
     users: 1,
     jobs: 1,
     description: 'Perfect for small teams hiring occasionally.',
-    features: ['20 Credits / month', '1 User license', '1 Active job post', 'Email support'],
+    features: ['150 Credits / month', '1 User license', '1 Active job post', 'Email support'],
   },
   {
     name: 'Starter',
     monthlyPrice: 374,
     yearlyPrice: 299,
-    credits: 70,
+    credits: 450,
     users: 5,
     jobs: 3,
     description: 'For growing teams with regular hiring needs.',
-    features: ['70 Credits / month', '5 User licenses', '3 Active job posts', 'Priority email support'],
+    features: ['450 Credits / month', '5 User licenses', '3 Active job posts', 'Priority email support'],
     popular: true,
   },
   {
     name: 'Growth',
     monthlyPrice: 2499,
     yearlyPrice: 1999,
-    credits: 600,
+    credits: 2500,
     users: 20,
     jobs: 20,
     description: 'Scale your hiring with advanced automation.',
-    features: ['600 Credits / month', '20 User licenses', '20 Active job posts', 'Dedicated account manager'],
+    features: ['2500 Credits / month', '20 User licenses', '20 Active job posts', 'Dedicated account manager'],
   },
   {
     name: 'Pro',
     monthlyPrice: 6249,
     yearlyPrice: 4999,
-    credits: 5000,
+    credits: 6000,
     users: 50,
     jobs: 'Unlimited',
     description: 'Maximum power for high-volume recruitment.',
-    features: ['5000 Credits / month', '50 User licenses', 'Unlimited job posts', '24/7 Priority support'],
+    features: ['6000 Credits / month', '50 User licenses', 'Unlimited job posts', '24/7 Priority support'],
   },
   {
     name: 'Enterprise',
@@ -74,6 +76,15 @@ const plans = [
     description: 'Tailored solutions for large organizations.',
     features: ['10,000+ Credits', 'Unlimited users', 'Unlimited job posts', 'Custom AI training', 'SLA & dedicated success mgr'],
   },
+];
+
+const roiServices = [
+    { id: 'resume', name: 'Resume Screen', credit: 1, manual: 15 },
+    { id: 'mcq', name: 'MCQ Round', credit: 0.5, manual: 20 },
+    { id: 'verbal', name: 'AI Phone Screen', credit: 1, manual: 30 },
+    { id: 'coding', name: 'Coding Round', credit: 0.5, manual: 60 },
+    { id: 'technical', name: 'Technical Round', credit: 0.5, manual: 60 },
+    { id: 'system', name: 'System Design', credit: 1, manual: 60 },
 ];
 
 const features = [
@@ -158,16 +169,68 @@ export default function PricingPage() {
   
   // ROI Calculator State
   const [applicants, setApplicants] = useState([100]);
-  const [timePerScreen, setTimePerScreen] = useState([30]);
-  const hourlyRate = 50; // Assumed hourly rate for recruiter
+  const [recruiterHourlyRate, setRecruiterHourlyRate] = useState(50);
+  const [selectedRoiServices, setSelectedRoiServices] = useState<string[]>(['resume', 'verbal']);
 
   const calculateROI = () => {
-    const traditionalTime = applicants[0] * timePerScreen[0]; // minutes
-    const aiTime = applicants[0] * 5; // AI takes ~5 mins per candidate review
-    const timeSaved = traditionalTime - aiTime;
-    const hoursSaved = timeSaved / 60;
-    const moneySaved = hoursSaved * hourlyRate;
-    return { hoursSaved: Math.round(hoursSaved), moneySaved: Math.round(moneySaved) };
+    // 1. Calculate Manual Cost & Time
+    const totalManualMinutes = selectedRoiServices.reduce((acc, serviceId) => {
+        const service = roiServices.find(s => s.id === serviceId);
+        return acc + (service?.manual || 0);
+    }, 0);
+
+    const totalManualHours = (totalManualMinutes * applicants[0]) / 60;
+    const manualCost = totalManualHours * recruiterHourlyRate;
+
+    // 2. Calculate AI Cost (Credits)
+    const creditsPerCandidate = selectedRoiServices.reduce((acc, serviceId) => {
+        const service = roiServices.find(s => s.id === serviceId);
+        return acc + (service?.credit || 0);
+    }, 0);
+
+    const totalCreditsNeeded = creditsPerCandidate * applicants[0];
+
+    // Find best plan
+    // We only look at plans with defined credits
+    let recommendedPlan = plans.filter(p => !p.isCustom).find(p => (p.credits as number) >= totalCreditsNeeded);
+    
+    // If exceeds largest plan, defaults to Enterprise logic or scaling pro
+    let aiCost = 0;
+    let planName = 'Enterprise';
+
+    if (recommendedPlan) {
+        planName = recommendedPlan.name;
+        // Cost is the monthly price if paying annually (roughly) or just use the price
+        // Since input is monthly applicants, we use monthly cost. 
+        // We use monthly price if they pay annually (cheapest option to show savings)
+        aiCost = recommendedPlan.yearlyPrice!; 
+        // Wait, yearlyPrice is PER MONTH when billed annually.
+        // Yes, plans array: monthlyPrice: 124, yearlyPrice: 99 (per month).
+    } else {
+        // If > 6000 credits, scale Pro plan
+        // Pro provides 6000 credits for $4999/mo (when billed annually? No wait)
+        // Pro yearlyPrice is 4999.
+        const proPlan = plans.find(p => p.name === 'Pro')!;
+        if (totalCreditsNeeded > (proPlan.credits as number)) {
+            const ratio = totalCreditsNeeded / (proPlan.credits as number);
+            aiCost = (proPlan.yearlyPrice!) * ratio;
+            planName = 'Pro (Scaled) / Enterprise';
+        } else {
+             // Should not happen if filtered correctly, but just in case
+             planName = 'Enterprise';
+        }
+    }
+
+    const savings = manualCost - aiCost;
+    
+    return { 
+        hoursSaved: Math.round(totalManualHours), 
+        moneySaved: Math.round(savings),
+        manualCost: Math.round(manualCost),
+        aiCost: Math.round(aiCost),
+        creditsNeeded: Math.round(totalCreditsNeeded),
+        recommendedPlan: planName
+    };
   };
 
   const roi = calculateROI();
@@ -435,50 +498,123 @@ export default function PricingPage() {
 
             <TabsContent value="roi">
               <div className="bg-card rounded-2xl p-8 border border-white/10 shadow-sm">
-                <div className="grid md:grid-cols-2 gap-12">
-                  <div>
+                <div className="grid md:grid-cols-12 gap-8">
+                  <div className="md:col-span-7">
                     <h3 className="text-2xl font-bold text-white mb-6">Estimate your Savings</h3>
                     
                     <div className="space-y-8">
-                      <div>
-                        <div className="flex justify-between items-center mb-4">
-                          <label className="text-sm font-medium text-slate-300">Monthly Applicants</label>
-                          <span className="text-primary font-bold">{applicants[0]}</span>
-                        </div>
-                        <Slider 
-                          value={applicants} 
-                          onValueChange={setApplicants} 
-                          max={1000} 
-                          step={10} 
-                          className="w-full"
-                        />
+                      {/* Hiring Volume */}
+                      <div className="p-6 bg-secondary/10 rounded-xl border border-white/5">
+                          <h4 className="font-semibold text-white mb-4 flex items-center gap-2">
+                              <Users className="w-4 h-4 text-blue-500"/> Hiring Volume
+                          </h4>
+                          <div className="space-y-6">
+                              <div>
+                                <div className="flex justify-between items-center mb-2">
+                                  <label className="text-sm font-medium text-slate-300">Monthly Applicants</label>
+                                  <span className="text-blue-400 font-bold bg-blue-400/10 px-2 py-0.5 rounded text-sm">{applicants[0]}</span>
+                                </div>
+                                <Slider 
+                                  value={applicants} 
+                                  onValueChange={setApplicants} 
+                                  max={1000} 
+                                  step={10} 
+                                  className="w-full"
+                                />
+                              </div>
+                              <div>
+                                <div className="flex justify-between items-center mb-2">
+                                  <label className="text-sm font-medium text-slate-300">Recruiter Hourly Rate ($)</label>
+                                  <span className="text-blue-400 font-bold bg-blue-400/10 px-2 py-0.5 rounded text-sm">${recruiterHourlyRate}</span>
+                                </div>
+                                <Slider 
+                                  value={[recruiterHourlyRate]} 
+                                  onValueChange={(val) => setRecruiterHourlyRate(val[0])} 
+                                  max={200} 
+                                  step={5} 
+                                  className="w-full"
+                                />
+                              </div>
+                          </div>
                       </div>
 
-                      <div>
-                        <div className="flex justify-between items-center mb-4">
-                          <label className="text-sm font-medium text-slate-300">Time per Screen (mins)</label>
-                          <span className="text-primary font-bold">{timePerScreen[0]} mins</span>
-                        </div>
-                        <Slider 
-                          value={timePerScreen} 
-                          onValueChange={setTimePerScreen} 
-                          max={60} 
-                          step={5} 
-                          className="w-full"
-                        />
+                      {/* Services Selection */}
+                      <div className="p-6 bg-secondary/10 rounded-xl border border-white/5">
+                          <h4 className="font-semibold text-white mb-4 flex items-center gap-2">
+                              <Calculator className="w-4 h-4 text-green-500"/> Hiring Stages
+                          </h4>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              {[
+                                { id: 'resume', name: 'Resume Screen', credit: 1, manual: 15 },
+                                { id: 'mcq', name: 'MCQ Round', credit: 0.5, manual: 20 },
+                                { id: 'verbal', name: 'AI Phone Screen', credit: 1, manual: 30 },
+                                { id: 'coding', name: 'Coding Round', credit: 0.5, manual: 60 },
+                                { id: 'technical', name: 'Technical Round', credit: 0.5, manual: 60 },
+                                { id: 'system', name: 'System Design', credit: 1, manual: 60 },
+                              ].map((service) => (
+                                  <div 
+                                      key={service.id}
+                                      onClick={() => {
+                                          if (selectedRoiServices.includes(service.id)) {
+                                              setSelectedRoiServices(selectedRoiServices.filter(s => s !== service.id));
+                                          } else {
+                                              setSelectedRoiServices([...selectedRoiServices, service.id]);
+                                          }
+                                      }}
+                                      className={`cursor-pointer p-3 rounded-lg border text-sm transition-all flex items-center gap-3 ${
+                                          selectedRoiServices.includes(service.id)
+                                          ? 'bg-blue-500/10 border-blue-500/50 text-white'
+                                          : 'bg-secondary/20 border-white/5 text-slate-400 hover:bg-secondary/30'
+                                      }`}
+                                  >
+                                      <div className={`w-4 h-4 rounded border flex items-center justify-center ${
+                                          selectedRoiServices.includes(service.id) ? 'bg-blue-500 border-blue-500' : 'border-slate-600'
+                                      }`}>
+                                          {selectedRoiServices.includes(service.id) && <Check size={10} className="text-white" />}
+                                      </div>
+                                      <div>
+                                          <div className="font-medium">{service.name}</div>
+                                          <div className="text-[10px] opacity-70">{service.credit} Cr • {service.manual}m manual</div>
+                                      </div>
+                                  </div>
+                              ))}
+                          </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-slate-900 text-white rounded-xl p-8 flex flex-col justify-center">
-                    <div className="mb-8">
-                      <p className="text-slate-400 text-sm mb-1">Time Saved Monthly</p>
-                      <p className="text-4xl font-bold text-emerald-400">{roi.hoursSaved} Hours</p>
+                  <div className="md:col-span-5 bg-slate-900 rounded-xl p-8 border border-white/10 flex flex-col h-full relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/10 rounded-full blur-3xl -translate-y-32 translate-x-32"></div>
+                    
+                    <div className="relative z-10 flex-1 space-y-8">
+                        <div>
+                            <p className="text-slate-400 text-sm mb-1 font-medium uppercase tracking-wider">Estimated Monthly Savings</p>
+                            <p className="text-5xl font-bold text-green-400">${roi.moneySaved.toLocaleString()}</p>
+                            <div className="flex justify-between items-center mt-2 text-xs text-slate-500">
+                                <span>Manual: ${roi.manualCost.toLocaleString()}</span>
+                                <span>AI Cost: ~${roi.aiCost.toLocaleString()}</span>
+                            </div>
+                        </div>
+
+                        <div className="space-y-4">
+                            <div className="bg-white/5 p-4 rounded-lg border border-white/5">
+                                <div className="text-slate-400 text-xs uppercase mb-1">Time Saved</div>
+                                <div className="text-2xl font-bold text-blue-400">{roi.hoursSaved.toLocaleString()} Hours</div>
+                                <div className="text-xs text-slate-500">~{Math.round(roi.hoursSaved / 40)} work weeks</div>
+                            </div>
+
+                            <div className="bg-white/5 p-4 rounded-lg border border-white/5">
+                                <div className="text-slate-400 text-xs uppercase mb-1">Credits Needed</div>
+                                <div className="text-2xl font-bold text-white">{roi.creditsNeeded.toLocaleString()} / mo</div>
+                                <div className="text-xs text-slate-500">Recommended: <span className="text-blue-400 font-bold">{roi.recommendedPlan}</span></div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                      <p className="text-slate-400 text-sm mb-1">Money Saved Monthly</p>
-                      <p className="text-4xl font-bold text-emerald-400">${roi.moneySaved.toLocaleString()}</p>
-                      <p className="text-slate-500 text-xs mt-2">*Based on estimated $50/hr recruiter cost</p>
+                    
+                    <div className="mt-8 pt-6 border-t border-white/10 relative z-10">
+                        <Button className="w-full bg-green-600 hover:bg-green-500 text-white font-bold" onClick={() => navigate('/contact-us')}>
+                            Start Saving Today
+                        </Button>
                     </div>
                   </div>
                 </div>
@@ -488,18 +624,28 @@ export default function PricingPage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-20 text-center bg-primary rounded-3xl p-12 relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        {/* CTA */}
+        <div className="mt-20 text-center bg-slate-900 rounded-3xl p-12 relative overflow-hidden border border-slate-800">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-[100px] pointer-events-none" />
             <div className="relative z-10">
-                <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">Ready to transform your hiring?</h2>
-                <p className="text-primary-foreground/70 max-w-2xl mx-auto mb-8 text-lg">
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">Ready to transform your hiring?</h2>
+                <p className="text-slate-400 max-w-2xl mx-auto mb-10 text-lg">
                     Join thousands of companies using our AI to hire better talent, faster.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button size="lg" variant="secondary" className="font-bold bg-white text-black hover:bg-white/90">
+                    <Button 
+                      size="lg" 
+                      onClick={() => navigate('/contact-us')}
+                      className="font-bold bg-white text-black hover:bg-slate-200 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all"
+                    >
                         Start Free Trial
                     </Button>
-                    <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white/10">
+                    <Button 
+                      size="lg" 
+                      variant="outline" 
+                      onClick={() => navigate('/contact-us')}
+                      className="bg-transparent text-white border-slate-700 hover:bg-slate-800 hover:text-white hover:border-slate-600 backdrop-blur-sm"
+                    >
                         Book Demo
                     </Button>
                 </div>
