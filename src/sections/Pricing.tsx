@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Check, ChevronDown, Calculator, TrendingUp } from 'lucide-react';
+import { Check, Calculator, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const currencies = {
@@ -62,10 +60,8 @@ const plans = [
 ];
 
 export default function Pricing() {
-  const [currency, setCurrency] = useState('USD');
-  const [isYearly, setIsYearly] = useState(true);
+  const [currency] = useState('USD');
   const { ref, isVisible } = useScrollAnimation();
-  const navigate = useNavigate();
 
   return (
     <section id="pricing" className="bg-black py-24 relative overflow-hidden">
@@ -125,7 +121,6 @@ export default function Pricing() {
                     <td className="py-3 px-4 text-sm text-slate-300 bg-black/80 backdrop-blur sticky left-0 z-10 border-r border-white/10 md:border-none drop-shadow-md">{feature}</td>
                     {plans.map((plan) => {
                       const isLite = plan.name === 'Lite';
-                      const isStarter = plan.name === 'Starter';
                       const isGrowth = plan.name === 'Growth';
                       const isPro = plan.name === 'Pro';
                       
