@@ -1,4 +1,4 @@
-import { useState, useEffect, KeyboardEvent } from 'react';
+import { useState, useEffect, type KeyboardEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Code2, Terminal, Cpu, Check,
