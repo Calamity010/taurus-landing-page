@@ -21,11 +21,11 @@ const aiAgents = [
     description: "Conducts, records, proctors, and evaluates in a video interview.",
     href: "/ai-agents/video-interviewer"
   },
-  {
-    title: "AI Phone Screener",
-    description: "AI conducts phone interviews, evaluates responses, & provides a score to identify the best fit.",
-    href: "/ai-phone-screener"
-  },
+  // {
+  //   title: "AI Phone Screener",
+  //   description: "AI conducts phone interviews, evaluates responses, & provides a score to identify the best fit.",
+  //   href: "/ai-phone-screener"
+  // },
   {
     title: "AI Resume Screener",
     description: "AI screens and analyzes resumes, ranks candidates, and delivers instant insights to highlight the best fit.",

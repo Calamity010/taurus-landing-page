@@ -72,8 +72,9 @@ const sections = [
   {
     title: '8. Contact Us',
     content: [
-      'For privacy-related inquiries, please contact our Data Protection Officer at: privacy@thetaurus.ai',
-      'Taurus, Inc | 2261 Market Street STE 10764, San Francisco, CA 94114',
+      'For privacy-related inquiries, please contact us at: sales@thetaurus.ai',
+      'Aashvi, 3rd Floor, Channasandra Main Road, Whitefield, Bangalore – 560066, India',
+      'Phone: +91 63634 02404',
       'We will respond to all legitimate requests within 30 days.',
     ],
   },

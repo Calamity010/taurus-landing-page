@@ -5,12 +5,12 @@ import { motion } from 'framer-motion';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const services = [
-  { id: 'resume', name: 'Resume Screener', credit: 1, manualTime: 15, label: 'Resume Screening' },
-  { id: 'mcq', name: 'MCQ Assessment', credit: 0.5, manualTime: 20, label: 'MCQ Round' },
-  { id: 'verbal', name: 'Verbal Interviewer', credit: 1, manualTime: 30, label: 'Phone Screening' },
-  { id: 'coding', name: 'Coding Interviewer', credit: 0.5, manualTime: 60, label: 'Coding Round' },
-  { id: 'technical', name: 'Technical Interviewer', credit: 0.5, manualTime: 60, label: 'Technical Round' },
-  { id: 'system', name: 'System Design', credit: 1, manualTime: 60, label: 'System Design' },
+  { id: 'resume', name: 'Resume Screener', credit: 0, manualTime: 15, label: 'Resume Screening', free: true },
+  { id: 'mcq', name: 'MCQ Assessment', credit: 0.5, manualTime: 20, label: 'MCQ Round', free: false },
+  { id: 'verbal', name: 'Verbal Interviewer', credit: 1, manualTime: 30, label: 'Phone Screening', free: false },
+  { id: 'coding', name: 'Coding Interviewer', credit: 0.5, manualTime: 60, label: 'Coding Round', free: false },
+  { id: 'technical', name: 'Technical Interviewer', credit: 0.5, manualTime: 60, label: 'Technical Round', free: false },
+  { id: 'system', name: 'System Design', credit: 1, manualTime: 60, label: 'System Design', free: false },
 ];
 
 const plans = [
@@ -194,7 +194,10 @@ export default function ROICalculator() {
                                                 {service.name}
                                             </div>
                                             <div className="text-xs text-slate-500">
-                                                {service.credit} Credit{service.credit !== 1 ? 's' : ''} • ~{service.manualTime}m manual
+                                                {service.free
+                                                  ? <span className="text-green-400 font-bold">Free</span>
+                                                  : <>{service.credit} Credit{service.credit !== 1 ? 's' : ''}</>
+                                                } • ~{service.manualTime}m manual
                                             </div>
                                         </div>
                                     </div>

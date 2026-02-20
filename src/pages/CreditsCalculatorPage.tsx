@@ -25,9 +25,12 @@ const CreditsCalculatorPage = () => {
                <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
                    Credits Calculator
                </h1>
-               <p className="text-xl text-slate-400">
+               <p className="text-xl text-slate-400 mb-6">
                    Plan and optimize your hiring budget. No hidden fees, pay only for what you use.
                </p>
+               <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full text-green-400 text-sm font-semibold">
+                   🎉 Resume Screening is always <span className="font-bold underline">Free</span> — Credits are for AI Interview services only.
+               </div>
            </div>
        </section>
         

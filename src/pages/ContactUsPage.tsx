@@ -119,7 +119,7 @@ export default function ContactUsPage() {
                   </div>
                   <div>
                     <p className="text-sm text-slate-400">Email us at</p>
-                    <p className="text-white font-medium">hello@taurushire.com</p>
+                    <p className="text-white font-medium">sales@thetaurus.ai</p>
                   </div>
                 </div>
 
@@ -129,7 +129,7 @@ export default function ContactUsPage() {
                   </div>
                   <div>
                     <p className="text-sm text-slate-400">Call us</p>
-                    <p className="text-white font-medium">+1 (555) 123-4567</p>
+                    <p className="text-white font-medium">+91 63634 02404</p>
                   </div>
                 </div>
 
@@ -139,7 +139,7 @@ export default function ContactUsPage() {
                   </div>
                   <div>
                     <p className="text-sm text-slate-400">Visit HQ</p>
-                    <p className="text-white font-medium">123 AI Boulevard, Silicon Valley, CA</p>
+                    <p className="text-white font-medium">Aashvi, 3rd Floor, Channasandra Main Road, Whitefield, Bangalore – 560066</p>
                   </div>
                 </div>
               </div>
@@ -259,9 +259,9 @@ export default function ContactUsPage() {
             
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { city: 'San Francisco', address: '123 Market St, Suite 400', country: 'United States' },
-                { city: 'London', address: '45 Oxford Street', country: 'United Kingdom' },
-                { city: 'Singapore', address: '88 Robinson Road', country: 'Singapore' }
+                { city: 'Bangalore', address: 'Aashvi, 3rd Floor, Channasandra Main Road, Whitefield', country: 'Karnataka – 560066, India' },
+                { city: 'Phone', address: '+91 63634 02404', country: 'Mon–Sat, 9 AM – 7 PM IST' },
+                { city: 'Email', address: 'sales@thetaurus.ai', country: 'Replies within 24 hours' }
               ].map((office) => (
                 <motion.div 
                   key={office.city}

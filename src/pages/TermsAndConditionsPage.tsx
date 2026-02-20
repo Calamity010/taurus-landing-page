@@ -83,8 +83,9 @@ const sections = [
   {
     title: '10. Contact Information',
     content: [
-      'For questions about these Terms, contact us at: legal@thetaurus.ai',
-      'Taurus, Inc | 2261 Market Street STE 10764, San Francisco, CA 94114',
+      'For questions about these Terms, contact us at: sales@thetaurus.ai',
+      'Aashvi, 3rd Floor, Channasandra Main Road, Whitefield, Bangalore – 560066, India',
+      'Phone: +91 63634 02404',
     ],
   },
 ];

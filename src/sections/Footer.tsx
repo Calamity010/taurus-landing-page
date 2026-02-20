@@ -12,7 +12,7 @@ const quickLinks = [
 
 const aiAgents = [
   { label: 'AI Video Interviewer', href: '/ai-agents/video-interviewer' },
-  { label: 'AI Phone Screener', href: '/ai-phone-screener' },
+  // { label: 'AI Phone Screener', href: '/ai-phone-screener' },
   { label: 'AI Resume Screener', href: '/ai-resume-screener' },
   { label: 'AI Coding Interviewer', href: '/ai-coding-interviewer' },
   { label: 'AI MCQs', href: '/ai-mcq-interviewer' },
@@ -315,7 +315,7 @@ export default function Footer() {
             </Link>
           </div>
           <p className="text-sm text-slate-400 text-center md:text-right">
-            © Taurus, Inc | 2261 Market Street STE 10764, San Francisco, CA 94114
+            © Taurus, Inc | Aashvi, 3rd Floor, Channasandra Main Road, Whitefield, Bangalore – 560066
           </p>
         </motion.div>
       </div>
