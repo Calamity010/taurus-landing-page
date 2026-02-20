@@ -3,38 +3,35 @@ import { Link } from 'react-router-dom';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const quickLinks = [
-  { label: 'Manifesto', href: '#' },
+  { label: 'Manifesto', href: '/contact-us' },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'Live Chat', href: '#' },
-  { label: 'Help Desk', href: '#' },
-  { label: 'Blog', href: '#' },
+  { label: 'Help Centre', href: '/resources/help-centre' },
+  { label: 'Blog', href: '/resources/blog' },
+  { label: 'Contact Us', href: '/contact-us' },
 ];
 
 const aiAgents = [
-  { label: 'AI Video Interviewer', href: '#' },
-  { label: 'AI Phone Screener', href: '#' },
-  { label: 'AI Resume Screener', href: '#' },
-  { label: 'AI Coding Interviewer', href: '#' },
-  { label: 'AI MCQs', href: '#' },
-  { label: 'AI System Design Interview', href: '#' },
+  { label: 'AI Video Interviewer', href: '/ai-agents/video-interviewer' },
+  { label: 'AI Phone Screener', href: '/ai-phone-screener' },
+  { label: 'AI Resume Screener', href: '/ai-resume-screener' },
+  { label: 'AI Coding Interviewer', href: '/ai-coding-interviewer' },
+  { label: 'AI MCQs', href: '/ai-mcq-interviewer' },
+  { label: 'AI System Design Interview', href: '/ai-system-design-interview' },
 ];
 
 const useCases = [
-  { label: 'Education', href: '#' },
-  { label: 'Technology', href: '#' },
-  { label: 'Retail', href: '#' },
-  { label: 'BFSI', href: '#' },
-  { label: 'Manufacturing', href: '#' },
-  { label: 'Semiconductors & Hardwares', href: '#' },
-  { label: 'Healthcare', href: '#' },
-  { label: 'PwC', href: '#' },
-  { label: 'EV & Automotive', href: '#' },
-  { label: 'Deloitte', href: '#' },
-  { label: 'Hospitality', href: '#' },
-  { label: 'EY', href: '#' },
-  { label: 'Aerospace & Defence', href: '#' },
-  { label: 'KPMG', href: '#' },
-  { label: 'Recruitment Agency', href: '#' },
+  { label: 'Education', href: '/use-cases/education' },
+  { label: 'Technology', href: '/use-cases/technology' },
+  { label: 'Retail', href: '/use-cases/retail' },
+  { label: 'BFSI', href: '/use-cases/bfsi' },
+  { label: 'Manufacturing', href: '/use-cases/manufacturing' },
+  { label: 'Semiconductors & Hardwares', href: '/use-cases/semiconductors-hardwares' },
+  { label: 'Healthcare', href: '/use-cases/healthcare' },
+  { label: 'EV & Automotive', href: '/use-cases/ev-automotive' },
+  { label: 'Hospitality', href: '/use-cases/hospitality' },
+  { label: 'Aerospace & Defence', href: '/use-cases/aerospace-defence' },
+  { label: 'Recruitment Agency', href: '/use-cases/recruitment-agency' },
+  { label: 'Big 4', href: '/use-cases/big-4' },
 ];
 
 const comparisons = [
@@ -242,12 +239,21 @@ export default function Footer() {
             <ul className="space-y-2">
               {aiAgents.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-slate-300 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </a>
+                  {link.href.startsWith('/') ? (
+                    <Link
+                      to={link.href}
+                      className="text-slate-300 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-slate-300 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -258,15 +264,15 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">
               Use Cases
             </h3>
-            <ul className="space-y-2 max-h-64 overflow-y-auto">
+            <ul className="space-y-2">
               {useCases.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-slate-300 hover:text-white transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -300,13 +306,13 @@ export default function Footer() {
           className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4"
         >
           <div className="flex items-center gap-4 text-sm text-slate-400">
-            <a href="#" className="hover:text-white transition-colors">
+            <Link to="/privacy-policy" className="hover:text-white transition-colors">
               Privacy Policy
-            </a>
+            </Link>
             <span>|</span>
-            <a href="#" className="hover:text-white transition-colors">
+            <Link to="/terms-and-conditions" className="hover:text-white transition-colors">
               Terms & Conditions
-            </a>
+            </Link>
           </div>
           <p className="text-sm text-slate-400 text-center md:text-right">
             © Taurus, Inc | 2261 Market Street STE 10764, San Francisco, CA 94114

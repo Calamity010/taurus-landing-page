@@ -24,15 +24,24 @@ import UseCasePage from '@/pages/UseCasePage';
 import BlogPage from '@/pages/BlogPage';
 import ResumeScreenerPage from '@/pages/ResumeScreenerPage';
 import CodingInterviewerPage from '@/pages/CodingInterviewerPage';
+import MCQInterviewerPage from '@/pages/MCQInterviewerPage';
+import SystemDesignInterviewerPage from '@/pages/SystemDesignInterviewerPage';
 import EnglishProficiencyPage from '@/pages/EnglishProficiencyPage';
 import PhoneScreenerPage from '@/pages/PhoneScreenerPage';
 import ResourcesListPage from '@/pages/ResourcesListPage';
+import CodeOfConductPage from '@/pages/CodeOfConductPage';
+import RemoteWorkPolicyPage from '@/pages/RemoteWorkPolicyPage';
+import SocialMediaPolicyPage from '@/pages/SocialMediaPolicyPage';
+import LeavePolicyPage from '@/pages/LeavePolicyPage';
+import TravelExpensePolicyPage from '@/pages/TravelExpensePolicyPage';
 import ComparePage from '@/pages/ComparePage';
 import ROICalculatorPage from '@/pages/ROICalculatorPage';
 import CreditsCalculatorPage from '@/pages/CreditsCalculatorPage';
 import HelpCentrePage from '@/pages/HelpCentrePage';
 import PricingPage from '@/pages/PricingPage';
 import ContactUsPage from '@/pages/ContactUsPage';
+import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage';
+import TermsAndConditionsPage from '@/pages/TermsAndConditionsPage';
 
 const HomePage = () => (
   <main>
@@ -82,10 +91,14 @@ function App() {
         {/* New Pages */}
         <Route path="/ai-resume-screener" element={<ResumeScreenerPage />} />
         <Route path="/ai-coding-interviewer" element={<CodingInterviewerPage />} />
+        <Route path="/ai-mcq-interviewer" element={<MCQInterviewerPage />} />
+        <Route path="/ai-system-design-interview" element={<SystemDesignInterviewerPage />} />
         <Route path="/english-proficiency-test" element={<EnglishProficiencyPage />} />
         <Route path="/ai-phone-screener" element={<PhoneScreenerPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/contact-us" element={<ContactUsPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
 
         {/* Resource Routes */}
         <Route path="/resources/compare" element={<ComparePage />} />
@@ -93,6 +106,13 @@ function App() {
         <Route path="/resources/roi-calculator" element={<ROICalculatorPage />} />
         <Route path="/resources/credits-calculator" element={<CreditsCalculatorPage />} />
         <Route path="/resources/help-centre" element={<HelpCentrePage />} />
+
+        {/* Policy Pages */}
+        <Route path="/resources/code-of-conduct" element={<CodeOfConductPage />} />
+        <Route path="/resources/remote-work-policy" element={<RemoteWorkPolicyPage />} />
+        <Route path="/resources/social-media-policy" element={<SocialMediaPolicyPage />} />
+        <Route path="/resources/leave-policy" element={<LeavePolicyPage />} />
+        <Route path="/resources/travel-expense-policy" element={<TravelExpensePolicyPage />} />
         
         {/* Generic Resource List Route (policies, letters, glossary, etc.) */}
         <Route path="/resources/:resourceId" element={<ResourcesListPage />} />

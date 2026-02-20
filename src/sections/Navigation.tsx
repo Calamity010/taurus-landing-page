@@ -39,7 +39,7 @@ const aiAgents = [
   {
     title: "AI MCQs",
     description: "Rapidly screen technical knowledge and aptitude with secure, automated assessments.",
-    href: "/ai-mcqs"
+    href: "/ai-mcq-interviewer"
   },
   {
     title: "AI System Design Interview",
@@ -54,12 +54,11 @@ const resourceItems = [
   { title: "Help centre", description: "Instant answers for every feature", href: "/resources/help-centre" },
   { title: "Credits calculator", description: "Plan and optimize your hiring budget", href: "/resources/credits-calculator" },
   { title: "ROI calculator", description: "Measure your hiring time and savings", href: "/resources/roi-calculator" },
-  { title: "HR Policies", description: "Ready-to-use compliance and culture frameworks", href: "/resources/hr-policies" },
-  { title: "HR Letters", description: "Professional templates for every occasion", href: "/resources/hr-letters" },
-  { title: "HR Glossary", description: "Quickly decode essential industry terms", href: "/resources/hr-glossary" },
-  { title: "Job Descriptions", description: "Attract talent with high-impact templates", href: "/resources/job-descriptions" },
-  { title: "Minimum Wages", description: "Stay updated on regional pay laws", href: "/resources/minimum-wages" },
-  { title: "Holiday Lists", description: "Track regional and national public holidays", href: "/resources/holiday-lists" },
+  { title: "Code of Conduct", description: "Professional ethics, behavior, and compliance standards", href: "/resources/code-of-conduct" },
+  { title: "Remote Work Policy", description: "Guidelines for remote, hybrid, and on-site work arrangements", href: "/resources/remote-work-policy" },
+  { title: "Social Media Policy", description: "Rules for responsible employee social media use", href: "/resources/social-media-policy" },
+  { title: "Leave Policy", description: "Entitlements for casual, sick, maternity & paternity leave", href: "/resources/leave-policy" },
+  { title: "Travel & Expense Policy", description: "Rules for travel authorization and reimbursement", href: "/resources/travel-expense-policy" },
 ];
 
 const industries = [
