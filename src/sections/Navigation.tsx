@@ -59,6 +59,7 @@ const resourceItems = [
   { title: "Social Media Policy", description: "Rules for responsible employee social media use", href: "/resources/social-media-policy" },
   { title: "Leave Policy", description: "Entitlements for casual, sick, maternity & paternity leave", href: "/resources/leave-policy" },
   { title: "Travel & Expense Policy", description: "Rules for travel authorization and reimbursement", href: "/resources/travel-expense-policy" },
+  { title: "Job Descriptions", description: "Ready-to-use JD templates for key roles at Taurus AI", href: "/resources/job-descriptions" },
 ];
 
 const industries = [
@@ -150,7 +151,7 @@ export default function Navigation() {
                       Resources
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-[600px] gap-3 p-6 md:w-[700px] lg:w-[800px] grid-cols-2 bg-popover rounded-xl shadow-xl border border-white/10">
+                      <ul className="grid w-[560px] gap-1.5 p-4 lg:w-[640px] grid-cols-2 bg-popover rounded-xl shadow-xl border border-white/10">
                         {resourceItems.map((item) => (
                           <ListItem key={item.title} title={item.title} href={item.href}>
                             {item.description}
@@ -324,12 +325,12 @@ const ListItem = React.forwardRef<
             <Link
               to={href!}
               className={cn(
-                "block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-white/5 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
+                "block select-none rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-white/5 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
                 className
               )}
             >
-              <div className="text-[15px] font-semibold leading-none text-white group-hover:text-white transition-colors">{title}</div>
-              <p className="line-clamp-2 text-sm leading-relaxed text-slate-400 mt-1.5 font-normal">
+              <div className="text-[14px] font-semibold leading-none text-white group-hover:text-white transition-colors">{title}</div>
+              <p className="line-clamp-1 text-xs leading-relaxed text-slate-400 mt-1 font-normal">
                 {children}
               </p>
             </Link>
@@ -345,13 +346,13 @@ const ListItem = React.forwardRef<
           ref={ref}
           href={href}
           className={cn(
-            "block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-white/5 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
+            "block select-none rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-white/5 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
             className
           )}
           {...props}
         >
-          <div className="text-[15px] font-semibold leading-none text-white group-hover:text-white transition-colors">{title}</div>
-          <p className="line-clamp-2 text-sm leading-relaxed text-slate-400 mt-1.5 font-normal">
+          <div className="text-[14px] font-semibold leading-none text-white group-hover:text-white transition-colors">{title}</div>
+          <p className="line-clamp-1 text-xs leading-relaxed text-slate-400 mt-1 font-normal">
             {children}
           </p>
         </a>

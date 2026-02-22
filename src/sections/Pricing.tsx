@@ -12,7 +12,7 @@ const currencies = {
 };
 
 const creditCosts = [
-    { service: 'Resume Screener', cost: 1 },
+    { service: 'Resume Screener', cost: 0 },
     { service: 'Verbal Interviewer', cost: 1 },
     { service: 'Technical Interviewer', cost: 0.5 },
     { service: 'Coding Interviewer', cost: 0.5 },
@@ -185,7 +185,9 @@ export default function Pricing() {
                 <div key={item.service} className="flex justify-between items-center border-b border-white/5 pb-2 last:border-0 last:pb-0">
                   <span className="text-slate-300">{item.service}</span>
                   <span className="font-semibold text-white">
-                    {item.cost} credit{item.cost !== 1 ? 's' : ''}
+                    {item.cost === 0 ? 'Free' : (
+                      <>{item.cost} credit{item.cost !== 1 ? 's' : ''}</>
+                    )}
                   </span>
                 </div>
               ))}

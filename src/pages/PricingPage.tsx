@@ -6,7 +6,6 @@ import {
   Minus, 
   ChevronDown, 
   FileVideo, 
-  Languages, 
   Code, 
   Mic, 
   FileText,
@@ -79,7 +78,7 @@ const plans = [
 ];
 
 const roiServices = [
-    { id: 'resume', name: 'Resume Screen', credit: 1, manual: 15 },
+    { id: 'resume', name: 'Resume Screen', credit: 0, manual: 15 },
     { id: 'mcq', name: 'MCQ Round', credit: 0.5, manual: 20 },
     { id: 'verbal', name: 'AI Phone Screen', credit: 1, manual: 30 },
     { id: 'coding', name: 'Coding Round', credit: 0.5, manual: 60 },
@@ -132,15 +131,6 @@ const features = [
     ]
   },
   {
-    category: 'English Proficiency (Verbal)',
-    icon: Languages,
-    items: [
-      { name: 'Grammar Analysis', access: ['growth', 'pro', 'enterprise'] },
-      { name: 'Vocabulary Assessment', access: ['growth', 'pro', 'enterprise'] },
-      { name: 'Pronunciation Check', access: ['growth', 'pro', 'enterprise'] },
-    ]
-  },
-  {
     category: 'AI Coding Interviewer',
     icon: Code,
     items: [
@@ -149,11 +139,21 @@ const features = [
       { name: 'Code Playback', access: ['all'] },
       { name: 'Auto-Grading', access: ['all'] },
     ]
+  },
+  {
+    category: 'AI System Design Interviewer',
+    icon: Layout,
+    items: [
+      { name: 'Interactive Whiteboard', access: ['growth', 'pro', 'enterprise'] },
+      { name: 'Real-time Architecture Drawing', access: ['growth', 'pro', 'enterprise'] },
+      { name: 'Scalability Probing', access: ['growth', 'pro', 'enterprise'] },
+      { name: 'Trade-off Analysis', access: ['growth', 'pro', 'enterprise'] },
+    ]
   }
 ];
 
 const creditCosts = [
-  { service: 'Resume Screener', cost: 1, icon: FileText },
+  { service: 'Resume Screener', cost: 0, icon: FileText },
   { service: 'Verbal Interviewer', cost: 1, icon: Mic },
   { service: 'Technical Interviewer', cost: 0.5, icon: FileVideo },
   { service: 'Coding Interviewer', cost: 0.5, icon: Code },
@@ -489,7 +489,13 @@ export default function PricingPage() {
                         <item.icon className="w-5 h-5 text-primary" />
                       </div>
                       <h4 className="font-semibold text-white mb-1">{item.service}</h4>
-                      <p className="text-2xl font-bold text-primary">{item.cost} <span className="text-sm font-normal text-slate-400">Credit{item.cost !== 1 && 's'}</span></p>
+                      <p className="text-2xl font-bold text-primary">
+                        {item.cost === 0 ? 'Free' : (
+                          <>
+                            {item.cost} <span className="text-sm font-normal text-slate-400">Credit{item.cost !== 1 && 's'}</span>
+                          </>
+                        )}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -545,7 +551,8 @@ export default function PricingPage() {
                           </h4>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               {[
-                                { id: 'resume', name: 'Resume Screen', credit: 1, manual: 15 },
+                                {
+                                  id: 'resume', name: 'Resume Screen', credit: 0, manual: 15 },
                                 { id: 'mcq', name: 'MCQ Round', credit: 0.5, manual: 20 },
                                 { id: 'verbal', name: 'AI Phone Screen', credit: 1, manual: 30 },
                                 { id: 'coding', name: 'Coding Round', credit: 0.5, manual: 60 },
@@ -574,7 +581,9 @@ export default function PricingPage() {
                                       </div>
                                       <div>
                                           <div className="font-medium">{service.name}</div>
-                                          <div className="text-[10px] opacity-70">{service.credit} Cr • {service.manual}m manual</div>
+                                          <div className="text-[10px] opacity-70">
+                                            {service.credit === 0 ? 'Free' : `${service.credit} Cr`} • {service.manual}m manual
+                                          </div>
                                       </div>
                                   </div>
                               ))}

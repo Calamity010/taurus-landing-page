@@ -42,6 +42,7 @@ import PricingPage from '@/pages/PricingPage';
 import ContactUsPage from '@/pages/ContactUsPage';
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage';
 import TermsAndConditionsPage from '@/pages/TermsAndConditionsPage';
+import JobDescriptionsPage from '@/pages/JobDescriptionsPage';
 
 const HomePage = () => (
   <main>
@@ -106,6 +107,9 @@ function App() {
         <Route path="/resources/roi-calculator" element={<ROICalculatorPage />} />
         <Route path="/resources/credits-calculator" element={<CreditsCalculatorPage />} />
         <Route path="/resources/help-centre" element={<HelpCentrePage />} />
+
+        {/* Job Descriptions */}
+        <Route path="/resources/job-descriptions" element={<JobDescriptionsPage />} />
 
         {/* Policy Pages */}
         <Route path="/resources/code-of-conduct" element={<CodeOfConductPage />} />
