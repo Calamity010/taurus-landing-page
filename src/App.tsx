@@ -15,6 +15,7 @@ import Stats from '@/sections/Stats';
 import FAQ from '@/sections/FAQ';
 import Footer from '@/sections/Footer';
 import ROICalculator from '@/sections/ROICalculator';
+import AgencySection from '@/sections/AgencySection';
 import CookieConsent from '@/components/CookieConsent';
 import ChatWidget from '@/components/ChatWidget';
 
@@ -43,6 +44,7 @@ import ContactUsPage from '@/pages/ContactUsPage';
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage';
 import TermsAndConditionsPage from '@/pages/TermsAndConditionsPage';
 import JobDescriptionsPage from '@/pages/JobDescriptionsPage';
+import AgencyPage from '@/pages/AgencyPage2';
 
 const HomePage = () => (
   <main>
@@ -53,6 +55,7 @@ const HomePage = () => (
     <G2Badges />
     <SoftwareSuite />
     <HumanAIComparison />
+    <AgencySection />
     <Pricing />
     <Stats />
     <ROICalculator />
@@ -97,6 +100,7 @@ function App() {
         <Route path="/english-proficiency-test" element={<EnglishProficiencyPage />} />
         <Route path="/ai-phone-screener" element={<PhoneScreenerPage />} />
         <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/agency" element={<AgencyPage />} />
         <Route path="/contact-us" element={<ContactUsPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />

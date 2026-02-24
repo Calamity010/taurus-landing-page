@@ -145,6 +145,21 @@ export default function Navigation() {
                     </NavigationMenuLink>
                   </NavigationMenuItem>
 
+                  {/* Agency Link */}
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <button
+                        className={cn(
+                          navigationMenuTriggerStyle(),
+                          "text-[15px] font-medium text-slate-300 hover:text-white hover:bg-transparent bg-transparent focus:bg-transparent focus:text-white data-[active]:bg-transparent cursor-pointer"
+                        )}
+                        onClick={() => navigate('/agency')}
+                      >
+                        Agency
+                      </button>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+
                    {/* Resources Dropdown */}
                    <NavigationMenuItem>
                     <NavigationMenuTrigger className="text-[15px] font-medium text-slate-300 hover:text-white hover:bg-transparent bg-transparent focus:bg-transparent focus:text-white data-[active]:bg-transparent data-[state=open]:bg-transparent">
@@ -264,6 +279,7 @@ export default function Navigation() {
                   </div>
                   
                   <button onClick={() => navigate('/pricing')} className="px-4 py-2 text-lg font-medium text-slate-300 hover:text-white block text-left w-full">Pricing</button>
+                  <button onClick={() => navigate('/agency')} className="px-4 py-2 text-lg font-medium text-slate-300 hover:text-white block text-left w-full">Agency</button>
 
                   <div className="px-4 py-2">
                     <h3 className="text-sm font-semibold text-slate-500 mb-2 uppercase tracking-wider">Resources</h3>

@@ -5,6 +5,7 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 const quickLinks = [
   { label: 'Manifesto', href: '/contact-us' },
   { label: 'Pricing', href: '/pricing' },
+  { label: 'Agency', href: '/agency' },
   { label: 'Help Centre', href: '/resources/help-centre' },
   { label: 'Blog', href: '/resources/blog' },
   { label: 'Contact Us', href: '/contact-us' },
