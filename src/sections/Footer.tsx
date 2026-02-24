@@ -6,6 +6,7 @@ const quickLinks = [
   { label: 'Manifesto', href: '/contact-us' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Agency', href: '/agency' },
+  { label: 'College', href: '/college' },
   { label: 'Help Centre', href: '/resources/help-centre' },
   { label: 'Blog', href: '/resources/blog' },
   { label: 'Contact Us', href: '/contact-us' },

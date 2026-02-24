@@ -16,6 +16,7 @@ import FAQ from '@/sections/FAQ';
 import Footer from '@/sections/Footer';
 import ROICalculator from '@/sections/ROICalculator';
 import AgencySection from '@/sections/AgencySection';
+import CollegeSection from '@/sections/CollegeSection';
 import CookieConsent from '@/components/CookieConsent';
 import ChatWidget from '@/components/ChatWidget';
 
@@ -45,6 +46,7 @@ import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage';
 import TermsAndConditionsPage from '@/pages/TermsAndConditionsPage';
 import JobDescriptionsPage from '@/pages/JobDescriptionsPage';
 import AgencyPage from '@/pages/AgencyPage2';
+import CollegePage from '@/pages/CollegePage';
 
 const HomePage = () => (
   <main>
@@ -56,6 +58,7 @@ const HomePage = () => (
     <SoftwareSuite />
     <HumanAIComparison />
     <AgencySection />
+    <CollegeSection />
     <Pricing />
     <Stats />
     <ROICalculator />
@@ -101,6 +104,7 @@ function App() {
         <Route path="/ai-phone-screener" element={<PhoneScreenerPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/agency" element={<AgencyPage />} />
+        <Route path="/college" element={<CollegePage />} />
         <Route path="/contact-us" element={<ContactUsPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
