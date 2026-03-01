@@ -202,8 +202,12 @@ export default function CodingInterviewer({
   const cIdRef = useRef<string | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const codeRef = useRef<string>(STARTER.python);
+  const langRef = useRef<string>('python');
 
   useEffect(() => { txRef.current = transcript; }, [transcript]);
+  useEffect(() => { codeRef.current = code; }, [code]);
+  useEffect(() => { langRef.current = lang; }, [lang]);
 
   /* ── camera ── */
   const openCam = useCallback(async () => {
@@ -243,18 +247,28 @@ export default function CodingInterviewer({
 
   /* ── send transcript ── */
   const sendTx = useCallback(async () => {
-    const t = txRef.current; if (!t.length) return;
+    const t = txRef.current;
+    // Build transcript: voice conversation + structured problem Q&A
+    const voiceTx = t.map(e => e.role === 'ai' ? { ai: e.text } : { user: e.text });
+    const problemTx = [
+      { ai: `Problem: ${DEMO_PROBLEM.title}\n\n${DEMO_PROBLEM.description}\n\nExamples:\n${DEMO_PROBLEM.examples.map((ex, i) => `Example ${i + 1}: Input: ${ex.input} | Output: ${ex.output}`).join('\n')}` },
+      { user: `Language: ${langRef.current}\n\nCode submitted:\n${codeRef.current}` },
+    ];
+    const transcript = [...voiceTx, ...problemTx];
+    console.log('[Coding] Sending transcript to backend, voice entries:', voiceTx.length);
     try {
       await fetch(`${apiBase.replace(/\/$/, '')}/api/landing-page/conversation`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          assistantId: aIdRef.current || 'coding-interview',
+          agentType: 'ai_coding_interview',
+          assistantId: "freja",
           callId: cIdRef.current,
-          transcript: t.map(e => e.role === 'ai' ? { ai: e.text } : { user: e.text }),
+          transcript,
           endedAt: new Date().toISOString(),
         }),
       });
-    } catch {}
+      console.log('[Coding] Transcript sent successfully');
+    } catch (err) { console.error('[Coding] Failed to send transcript:', err); }
   }, []);
 
   /* ── start ── */
@@ -287,7 +301,8 @@ export default function CodingInterviewer({
       });
       vapi.on('error', (e: any) => { setErrorMsg(e?.message || 'Error'); setPhase('error'); stopTimer(); });
       setPhase('connecting');
-      await vapi.start(aid);
+      const call = await vapi.start(aid);
+      if (call?.id) cIdRef.current = call.id;
     } catch (e: any) { setErrorMsg(e?.message || 'Failed to start'); setPhase('error'); }
   }, [jobTitle, sendTx]);
 

@@ -275,7 +275,8 @@ export default function VideoInterviewer({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          assistantId: assistantIdRef.current || 'interview',
+          agentType: 'ai_video_interview',
+          assistantId: "freja",
           callId: callIdRef.current,
           transcript: t.map((e) =>
             e.role === 'ai' ? { ai: e.text } : { user: e.text }
@@ -364,7 +365,8 @@ export default function VideoInterviewer({
       });
 
       setPhase('connecting');
-      await vapi.start(assistantId);
+      const call = await vapi.start(assistantId);
+      if (call?.id) callIdRef.current = call.id;
     } catch (err: any) {
       setErrorMsg(err?.message || 'Failed to start interview');
       setPhase('error');

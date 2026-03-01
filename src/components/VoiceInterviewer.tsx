@@ -21,6 +21,7 @@ export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerPr
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcript, setTranscript] = useState<Record<string, string>[]>([]);
   const assistantIdRef = useRef<string | null>(null);
+  const sentRef = useRef(false); // guard: only send transcript once per session
   
   // Debug logging
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerPr
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          agentType: 'ai_sales_assistant',
           assistantId: "freja",
           callId: assistantId,
           transcript: finalTranscript,
@@ -69,6 +71,7 @@ export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerPr
     // Configure event listeners
     vapi.on('call-start', () => {
       setStatus('active');
+      sentRef.current = false; // reset guard for new session
       setTranscript([]); // Reset transcript for new session
     });
 
@@ -76,7 +79,10 @@ export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerPr
       setStatus('idle');
       // Use functional state to get the most updated transcript for sending
       setTranscript(prev => {
-        sendTranscriptToBackend(prev, assistantIdRef.current);
+        if (!sentRef.current) {
+          sentRef.current = true;
+          sendTranscriptToBackend(prev, assistantIdRef.current);
+        }
         return prev;
       });
       onClose();
@@ -149,8 +155,7 @@ export default function VoiceInterviewer({ isOpen, onClose }: VoiceInterviewerPr
   }, []);
 
   const stopCall = () => {
-    vapi.stop();
-    onClose();
+    vapi.stop(); // this fires call-end which handles onClose + transcript
   };
 
   if (!isOpen) return null;

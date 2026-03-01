@@ -245,6 +245,11 @@ export default function MCQInterviewer({ isOpen, jobTitle, onClose }: MCQIntervi
   const streamRef = useRef<MediaStream | null>(null);
   const aIdRef = useRef<string | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const answersRef = useRef<Record<number, string>>({});
+  const questionsRef = useRef<MCQQuestion[]>([]);
+
+
+
 
   const currentQ = questions[qIndex] ?? null;
   const totalQ = questions.length;
@@ -279,7 +284,7 @@ export default function MCQInterviewer({ isOpen, jobTitle, onClose }: MCQIntervi
   /* ── start interview: fetch questions + connect Vapi ── */
   const startInterview = useCallback(async () => {
     setPhase('fetching'); setErrorMsg('');
-    setQIndex(0); setAnswers({}); setRevealed(false); setScore(0);
+    setQIndex(0); setAnswers({}); answersRef.current = {}; setRevealed(false); setScore(0);
 
     // 1. Fetch questions
     let qs: MCQQuestion[] | null = null;
@@ -297,6 +302,7 @@ export default function MCQInterviewer({ isOpen, jobTitle, onClose }: MCQIntervi
     } catch { /* fall through to static */ }
 
     if (!qs || qs.length === 0) qs = buildFallbackQuestions(jobTitle);
+    questionsRef.current = qs; // sync ref before state update
     setQuestions(qs);
 
     // 2. Connect Vapi for AI voice proctoring (optional — don't block on failure)
@@ -320,7 +326,9 @@ export default function MCQInterviewer({ isOpen, jobTitle, onClose }: MCQIntervi
   /* ── select an option ── */
   const selectOption = (label: string) => {
     if (!currentQ || selectedForCurrent) return; // already answered
-    setAnswers(prev => ({ ...prev, [currentQ.id]: label }));
+    const updated = { ...answersRef.current, [currentQ.id]: label };
+    answersRef.current = updated; // sync ref immediately
+    setAnswers(updated);
     setRevealed(true);
   };
 
@@ -329,14 +337,38 @@ export default function MCQInterviewer({ isOpen, jobTitle, onClose }: MCQIntervi
     if (!currentQ) return;
     setRevealed(false);
     if (qIndex + 1 >= totalQ) {
-      // Calculate score
-      const s = questions.reduce((acc, q) => {
-        const ans = answers[q.id];
+      const finalAnswers = answersRef.current;
+      const finalQuestions = questionsRef.current;
+      console.log('[MCQ] Finish clicked — questions:', finalQuestions.length, 'answers:', Object.keys(finalAnswers).length);
+      const s = finalQuestions.reduce((acc, q) => {
+        const ans = finalAnswers[q.id];
         return acc + (ans && q.correctAnswer && ans === q.correctAnswer ? 1 : 0);
       }, 0);
       setScore(s);
       stopTimer();
       getVapi()?.stop();
+      // Inline fetch — no useCallback/closure issues
+      const base = (import.meta.env.NEXT_PUBLIC_API_BACKEND_BASE_URL || '').replace(/\/$/, '');
+      const transcript = finalQuestions.flatMap(q => {
+        const lbl = finalAnswers[q.id];
+        const txt = q.options.find(o => o.label === lbl)?.text ?? lbl;
+        const entry: Record<string, string>[] = [{ ai: q.question }];
+        if (lbl) entry.push({ user: `${lbl}: ${txt}` });
+        return entry;
+      });
+      console.log('[MCQ] Sending to', `${base}/api/landing-page/conversation`, 'transcript length:', transcript.length);
+      fetch(`${base}/api/landing-page/conversation`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          agentType: 'ai_mcq_interview',
+          assistantId: 'freja',
+          transcript,
+          endedAt: new Date().toISOString(),
+        }),
+      })
+        .then(() => console.log('[MCQ] Transcript sent successfully'))
+        .catch(err => console.error('[MCQ] Failed to send transcript:', err));
       setPhase('results');
     } else {
       setQIndex(i => i + 1);
@@ -353,7 +385,33 @@ export default function MCQInterviewer({ isOpen, jobTitle, onClose }: MCQIntervi
   /* ── hang up ── */
   const hangUp = useCallback(() => {
     getVapi()?.stop(); getVapi()?.removeAllListeners();
-    stopTimer(); closeCam(); onClose();
+    stopTimer();
+    // Send whatever answers were collected so far
+    const finalQuestions = questionsRef.current;
+    const finalAnswers = answersRef.current;
+    if (finalQuestions.length > 0) {
+      const base = (import.meta.env.NEXT_PUBLIC_API_BACKEND_BASE_URL || '').replace(/\/$/, '');
+      const transcript = finalQuestions.flatMap(q => {
+        const lbl = finalAnswers[q.id];
+        const txt = q.options.find(o => o.label === lbl)?.text ?? lbl;
+        const entry: Record<string, string>[] = [{ ai: q.question }];
+        if (lbl) entry.push({ user: `${lbl}: ${txt}` });
+        return entry;
+      });
+      fetch(`${base}/api/landing-page/conversation`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          agentType: 'ai_mcq_interview',
+          assistantId: 'freja',
+          transcript,
+          endedAt: new Date().toISOString(),
+        }),
+      })
+        .then(() => console.log('[MCQ] hangUp transcript sent'))
+        .catch(err => console.error('[MCQ] hangUp transcript failed:', err));
+    }
+    closeCam(); onClose();
   }, [closeCam, onClose]);
 
   /* ── lifecycle ── */
@@ -361,7 +419,8 @@ export default function MCQInterviewer({ isOpen, jobTitle, onClose }: MCQIntervi
     if (isOpen) {
       setPhase('lobby'); setDur(0); setAiSpeaking(false);
       setMicOn(true); setCamOn(true);
-      setQuestions([]); setQIndex(0); setAnswers({}); setRevealed(false);
+      setQuestions([]); questionsRef.current = [];
+      setQIndex(0); setAnswers({}); answersRef.current = {}; setRevealed(false);
       openCam();
     } else {
       getVapi()?.stop(); getVapi()?.removeAllListeners();

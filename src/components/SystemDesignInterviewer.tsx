@@ -165,19 +165,29 @@ export default function SystemDesignInterviewer({
 
   /* ── transcript ── */
   const sendTx = useCallback(async () => {
-    const t = txRef.current; if (!t.length) return;
+    const t = txRef.current;
+    // Build transcript: voice conversation + structured problem context
+    const voiceTx = t.map(e => e.role === 'ai' ? { ai: e.text } : { user: e.text });
+    const problemTx = [
+      { ai: `System Design Problem: ${PROBLEM.title}\n\n${PROBLEM.description}\n\nRequirements:\n${PROBLEM.requirements.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n\nFollow-up Questions:\n${PROBLEM.followUp.map((q, i) => `${i + 1}. ${q}`).join('\n')}` },
+    ];
+    const transcript = [...voiceTx, ...problemTx];
+    console.log('[SystemDesign] Sending transcript to backend, voice entries:', voiceTx.length);
     try {
       await fetch(`${apiBase.replace(/\/$/, '')}/api/landing-page/conversation`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          assistantId: aIdRef.current || 'system-design-interview',
+          agentType: 'ai_system_design_interview',
+          assistantId: "freja",
           callId: cIdRef.current,
-          transcript: t.map(e => e.role === 'ai' ? { ai: e.text } : { user: e.text }),
+          transcript,
           endedAt: new Date().toISOString(),
         }),
       });
-    } catch {}
+      console.log('[SystemDesign] Transcript sent successfully');
+    } catch (err) { console.error('[SystemDesign] Failed to send transcript:', err); }
   }, []);
+
 
   /* ── start ── */
   const startInterview = useCallback(async () => {
@@ -209,7 +219,8 @@ export default function SystemDesignInterviewer({
       });
       vapi.on('error', (e: any) => { setErrorMsg(e?.message || 'Error'); setPhase('error'); stopTimer(); });
       setPhase('connecting');
-      await vapi.start(aid);
+      const call = await vapi.start(aid);
+      if (call?.id) cIdRef.current = call.id;
     } catch (e: any) { setErrorMsg(e?.message || 'Failed to start'); setPhase('error'); }
   }, [jobTitle, sendTx]);
 
