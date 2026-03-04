@@ -19,7 +19,7 @@ import AgencySection from '@/sections/AgencySection';
 import CollegeSection from '@/sections/CollegeSection';
 import CookieConsent from '@/components/CookieConsent';
 import ChatWidget from '@/components/ChatWidget';
-
+//edited checkkkkk
 // Pages
 import AgentPage from '@/pages/AgentPage';
 import UseCasePage from '@/pages/UseCasePage';
